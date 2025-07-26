@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 const RootLayout = () => {
   return (
-    <div>
+    <div >
       <Header></Header>
       <main className="overflow-x-clip">
         <Outlet></Outlet>

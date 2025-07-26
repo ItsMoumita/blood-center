@@ -10,6 +10,7 @@ import Lottie from "lottie-react";
 import BloodDrop from "../assets/BloodDrop.json";
 
 const menu = [
+  { name: "Home", path: "/" },
   { name: "Donation Requests", path: "/donation-requests" },
   { name: "Blog", path: "/blog" },
 ];
@@ -37,13 +38,15 @@ const Header = () => {
       });
   };
 
+  console.log("🚀 ~ Header ~ user:", user);
+
   return (
-    <nav className="bg-[#FFE8E8] border-b-2 border-[#ECAAA0] shadow-md z-50 font-['Sora',sans-serif]">
-      <div className="w-11/12 mx-auto py-4 flex justify-between items-center relative">
+    <nav className="sticky top-0 bg-[#F5F5F5] dark:bg-[#FFE8E8] border-b-2 border-[#BB2B29] dark:border-[#530404] shadow-lg z-50 ">
+      <div className="w-11/12 mx-auto py-2 flex justify-between items-center relative">
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center justify-center gap-2"
+          className="flex items-center justify-center gap-1"
         >
           <Lottie
             animationData={BloodDrop}
@@ -65,10 +68,10 @@ const Header = () => {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `px-5 py-2 rounded-lg font-medium transition-all duration-200 ${
+                `px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
                   isActive
-                    ? "bg-[#BB2B29] text-[#FFE8E8] shadow-md"
-                    : "text-[#530404] hover:bg-[#ECAAA0] hover:text-[#BB2B29]"
+                    ? "bg-[#ECAAA0] dark:bg-[#BB2B29] text-[#BB2B29] dark:text-[#FFE8E8] shadow-md"
+                    : "text-[#530404]  hover:text-[#BB2B29]"
                 }`
               }
             >
@@ -150,84 +153,81 @@ const Header = () => {
           )}
         </div>
 
-
-
         {/* Mobile Menu */}
         {isMenuOpen && (
-  <ul className="flex flex-col absolute top-full left-0 w-full bg-[#FFE8E8] border-t border-[#ECAAA0] shadow-md z-50 p-4 lg:hidden">
-    {/* Menu options - left aligned */}
-    <div className="flex flex-col gap-1 text-left">
-      {menu.map((item) => (
-        <NavLink
-          key={item.path}
-          to={item.path}
-          className={({ isActive }) =>
-            `block px-2 py-2 rounded font-medium ${
-              isActive
-                ? "bg-[#BB2B29] text-[#FFE8E8] shadow"
-                : "text-[#530404] hover:bg-[#ECAAA0] hover:text-[#BB2B29]"
-            }`
-          }
-          onClick={() => setIsMenuOpen(false)}
-        >
-          {item.name}
-        </NavLink>
-      ))}
-    </div>
+          <ul className="flex flex-col absolute top-full left-0 w-full bg-[#F5F5F5] dark:bg-[#FFE8E8] border-b-2 border-[#BB2B29] dark:border-[#530404] shadow-lg border-t z-50 p-4 lg:hidden">
+            {/* Menu options - left aligned */}
+            <div className="flex flex-col gap-1 text-left">
+              {menu.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `block px-2 py-2 rounded font-medium ${
+                      isActive
+                        ? "bg-[#BB2B29] text-[#FFE8E8] shadow"
+                        : "text-[#530404] hover:bg-[#ECAAA0] hover:text-[#BB2B29]"
+                    }`
+                  }
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
 
-    {/* Divider */}
-    <hr className="my-3 border-[#ECAAA0]" />
+            {/* Divider */}
+            <hr className="my-3 border-[#ECAAA0]" />
 
-    {/* User info or login/register */}
-    {user && user?.email ? (
-      <div className="flex flex-col items-start gap-2">
-        <div className="flex items-center gap-3">
-          {user.photoURL ? (
-            <img
-              src={user.photoURL}
-              alt="Profile"
-              className="w-10 h-10 rounded-full border-2 border-[#BB2B29]"
-            />
-          ) : (
-            <FaUserCircle className="w-10 h-10 text-[#BB2B29]" />
-          )}
-          <div>
-            <div className="font-semibold text-[#530404]">{user.displayName || "User"}</div>
-           
-          </div>
-        </div>
-        <button
-          onClick={logOuthandle}
-          className=" mt-2 px-4 py-2 rounded bg-[#BB2B29] text-[#FFE8E8] font-semibold hover:bg-[#530404] transition"
-        >
-          Sign Out
-        </button>
-      </div>
-    ) : (
-      <div className="flex flex-col gap-2">
-        <NavLink
-          to="/login"
-          className="px-4 py-2 rounded text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Login
-        </NavLink>
-        <NavLink
-          to="/registration"
-          className="px-4 py-2 rounded text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Register
-        </NavLink>
-      </div>
-    )}
+            {/* User info or login/register */}
+            {user && user?.email ? (
+              <div className="flex flex-col items-start gap-2">
+                <div className="flex items-center gap-3">
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full border-2 border-[#BB2B29]"
+                    />
+                  ) : (
+                    <FaUserCircle className="w-10 h-10 text-[#BB2B29]" />
+                  )}
+                  <div>
+                    <div className="font-semibold text-[#530404]">{user.displayName || "User"}</div>
+                  </div>
+                </div>
+                <button
+                  onClick={logOuthandle}
+                  className="mt-2 px-4 py-2 rounded bg-[#BB2B29] text-[#FFE8E8] font-semibold hover:bg-[#530404] transition"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <NavLink
+                  to="/login"
+                  className="px-4 py-2 rounded text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  to="/registration"
+                  className="px-4 py-2 rounded text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Register
+                </NavLink>
+              </div>
+            )}
 
-    {/* Theme Toggle at the bottom */}
-    <div className="mt-4">
-      <ThemeToggle />
-    </div>
-  </ul>
-)}
+            {/* Theme Toggle at the bottom */}
+            <div className="mt-4">
+              <ThemeToggle />
+            </div>
+          </ul>
+        )}
       </div>
     </nav>
   );
