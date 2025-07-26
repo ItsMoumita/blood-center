@@ -2,16 +2,16 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaArrowRight } from 'react-icons/f
 
 const ContactUs = () => {
     return (
-        <section className="relative bg-cover bg-center py-16" style={{
+        <section className="relative bg-cover  bg-center py-16" style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')"
         }}>
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-black opacity-70"></div>
 
             <div className="container relative mx-auto px-4">
-                <div className="flex flex-wrap -mx-4">
+                <div className="flex flex-wrap -mx-4 ">
                     {/* Left Side - Contact Info */}
-                    <div className="w-full md:w-1/2 px-4 flex items-center">
+                    <div className="w-full md:w-1/2 mb-4 px-4 flex items-center">
                         <div className="relative w-full h-full backdrop-blur-sm rounded-lg p-8" style={{
                             backgroundImage: "url('https://i.ibb.co/KpVpT5SY/Google-Map-TA.jpg')"
                         }}>
