@@ -46,7 +46,7 @@ const Header = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center justify-center gap-1"
+          className="flex items-center justify-center "
         >
           <Lottie
             animationData={BloodDrop}

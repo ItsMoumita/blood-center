@@ -11,7 +11,7 @@ const ContactUs = () => {
             <div className="container relative mx-auto px-4">
                 <div className="flex flex-wrap -mx-4 ">
                     {/* Left Side - Contact Info */}
-                    <div className="w-full md:w-1/2 mb-4 px-4 flex items-center">
+                    <div className="w-full md:w-1/2 sm:mb-4 px-4 flex items-center h-full">
                         <div className="relative w-full h-full backdrop-blur-sm rounded-lg p-8" style={{
                             backgroundImage: "url('https://i.ibb.co/KpVpT5SY/Google-Map-TA.jpg')"
                         }}>
@@ -86,7 +86,7 @@ const ContactUs = () => {
                                 <div>
                                     <textarea
                                         placeholder="MESSAGE"
-                                        rows="4"
+                                        rows="2"
                                         className="w-full p-3 bg-white text-gray-800 rounded-lg focus:outline-none focus:ring-0"
                                         aria-label="Message"
                                     ></textarea>
