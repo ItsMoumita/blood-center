@@ -19,13 +19,13 @@ const Banner = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#FFE8E8] via-[#F5F5F5] to-[#FFF] dark:from-[#530404] dark:to-[#BB2B29] transition-colors duration-300 overflow-hidden backdrop-blur-sm bg-opacity-80">
+    <section className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFF] dark:from-[#14274E] dark:via-black/30 dark:to-gray-500 transition-colors duration-300 overflow-hidden backdrop-blur-sm bg-opacity-80">
       {/* Left Content */}
       <div
         ref={leftRef}
         className="z-10 flex-1 flex flex-col justify-center items-start px-6 md:px-32 py-12"
       >
-        <span className="uppercase text-xs md:text-sm tracking-widest text-[#BB2B29] dark:text-[#FFE8E8] font-semibold mb-2">
+        <span className="uppercase text-xs md:text-sm tracking-widest text-[#BB2B29] dark:text-white/70 font-semibold mb-2">
           Let's Donate
         </span>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#22223B] dark:text-[#FFE8E8] mb-4 leading-tight">
