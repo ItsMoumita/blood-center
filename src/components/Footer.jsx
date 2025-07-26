@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4 md:gap-8">
           {/* Logo Section */}
           <div className="col-span-1 md:col-span-1 ">
             <Link
@@ -27,7 +27,7 @@ const Footer = () => {
             aria-label="Blood Drop Logo"
           />
           <span
-            className="bg-white bg-clip-text text-transparent font-extrabold text-2xl lg:text-3xl tracking-tight text-center"
+            className="bg-white bg-clip-text text-transparent font-extrabold text-xl lg:text-3xl tracking-tight text-center"
           >
             BloodCenter
           </span>
@@ -37,8 +37,8 @@ const Footer = () => {
 
           {/* Company Section */}
           <div>
-            <h6 className="font-bold text-lg mb-4">Company</h6>
-            <ul className="space-y-2">
+            <h6 className="font-bold text-lg mb-2 text-center">Company</h6>
+            <ul className=" flex md:flex-col gap-4 md:gap-2">
               <li>
                 <a href="/" className="hover:text-[#530404] dark:hover:text-[#ff4444] transition-colors">
                   Home
@@ -64,8 +64,8 @@ const Footer = () => {
 
           {/* Legal Section */}
           <div>
-            <h6 className="font-bold text-lg mb-4">Legal</h6>
-            <ul className="space-y-2">
+            <h6 className="font-bold text-lg mb-2 text-center">Legal</h6>
+            <ul className="flex md:flex-col gap-4 md:gap-2">
               <li>
                 <a href="#" className="hover:text-[#530404] dark:hover:text-[#ff4444] transition-colors">
                   Terms of Use
@@ -86,8 +86,8 @@ const Footer = () => {
 
           {/* Social Section */}
           <div>
-            <h6 className="font-bold text-lg mb-4">Connect</h6>
-            <div className="flex space-x-4">
+            <h6 className="font-bold text-lg mb-2 text-center">Social</h6>
+            <div className="flex gap-4 ">
               <a href="#" className="hover:text-[#530404] dark:hover:text-[#ff4444] transition-colors">
                 <FaTwitter className="text-white text-2xl hover:text-[#530404] dark:hover:text-[#ff4444]" />
               </a>
