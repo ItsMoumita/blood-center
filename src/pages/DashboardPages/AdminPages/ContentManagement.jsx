@@ -51,8 +51,8 @@ const ContentManagement = () => {
             </button>
           </Link>
         </div>
-        <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-2">
-          <label className="text-[#FFE8E8] font-semibold">Status:</label>
+        <div className="mb-6 md:mb-12 mt-6 flex flex-col sm:flex-row sm:items-center gap-2">
+          <label className="text-[#FFE8E8] font-semibold ">Status:</label>
           <select
             value={status}
             onChange={e => setStatus(e.target.value)}
