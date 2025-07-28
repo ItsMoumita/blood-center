@@ -1,17 +1,22 @@
-import axios from "axios";
+
 import { createBrowserRouter } from "react-router";
 import DashboardLayout from "../layouts/DashboardLayout";
 import RootLayout from "../layouts/RootLayout";
-import AddBooks from "../pages/AddBooks";
-import AllUsers from "../pages/AllUsers";
-import AvailableBooks from "../pages/AvailableBooks";
-import Dashboard from "../pages/Dashboard";
-import DetailsPage from "../pages/DetailsPage";
-import Error from "../pages/Error";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import MyBooks from "../pages/MyBooks";
-import Register from "../pages/Register";
+
+import Error from "../pages/HomePages/Error";
+import Home from "../pages/HomePages/Home";
+import Login from "../pages/AuthenticationPages/Login";
+import Register from "../pages/AuthenticationPages/Register";
+import MyDonationRequests from "../pages/DashboardPages/DonorPages/MyDonationRequests";
+import CreateDonationRequest from "../pages/DashboardPages/DonorPages/CreateDonationRequest";
+import EditDonationRequest from "../pages/DashboardPages/DonorPages/EditDonationRequest";
+import ViewDonationRequest from "../pages/DashboardPages/DonorPages/ViewDonation";
+import Dashboard from "../pages/DashboardPages/Dashboard";
+import RequireAdmin from "./RequireAdmin";
+import AllUsers from "../pages/DashboardPages/AdminPages/AllUsers";
+import AllBloodDonationRequests from "../pages/DashboardPages/AdminPages/AllBloodDonationRequests";
+import AddBlog from "../pages/DashboardPages/AdminPages/AddBlog";
+import ContentManagement from "../pages/DashboardPages/AdminPages/ContentManagement";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -24,47 +29,6 @@ const mainRoutes = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/available-books",
-        element: <AvailableBooks />,
-      },
-      {
-        path: "/details/:bookId",
-        element: <DetailsPage />,
-        loader: async ({ params }) => {
-          const { data } = await axios.get(
-            `http://localhost:5000/details/${params.bookId}`
-          );
-          return data;
-        },
-      },
-      {
-        path: "/dashboard",
-        element: <DashboardLayout />,
-        children: [
-          {
-            index: true,
-            element: <Dashboard />,
-          },
-          ,
-          {
-            path: "add-book",
-            element: <AddBooks />,
-          },
-          {
-            path: "all-users",
-            element: <AllUsers />,
-          },
-          {
-            path: "my-books",
-            element: <MyBooks />,
-          },
-          {
-            path: "my-requests",
-            element: <MyBooks />,
-          },
-        ],
-      },
-      {
         path: "login",
         element: <Login></Login>,
       },
@@ -72,7 +36,66 @@ const mainRoutes = createBrowserRouter([
         path: "registration",
         element: <Register></Register>,
       },
-      {},
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/my-donation-requests",
+        element: <MyDonationRequests />,
+      },
+      {
+        path: "/dashboard/create-donation-request",
+        element: <CreateDonationRequest />,
+      },
+      {
+        path: "/dashboard/edit-donation-request/:id",
+        element: <EditDonationRequest />,
+      },
+      {
+        path: "/dashboard/donation-request/:id",
+        element: <ViewDonationRequest></ViewDonationRequest>
+      },
+      {
+        path: "/dashboard/all-users",
+        element: (
+          <RequireAdmin>
+            <AllUsers />
+          </RequireAdmin>
+        ),
+      },
+      {
+        path: "/dashboard/all-blood-donation-request",
+        element: (
+          <RequireAdmin>
+            <AllBloodDonationRequests />
+          </RequireAdmin>
+        )
+      },
+      {
+        path: "/dashboard/content-management",
+        element: (
+          <RequireAdmin>
+            <ContentManagement />
+          </RequireAdmin>
+        )
+      },
+      {
+        path: "/dashboard/content-management/add-blog",
+        element: (
+          <RequireAdmin>
+            <AddBlog />
+          </RequireAdmin>
+        )
+      },
+
+
     ],
   },
 ]);

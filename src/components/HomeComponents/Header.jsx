@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { CgMenuMotion } from "react-icons/cg";
 import { RiMenuAddLine } from "react-icons/ri";
 import { Link, NavLink } from "react-router";
-import { AuthContext } from "../providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../ExtraComponents/ThemeToggle";
 import { FaUserCircle } from "react-icons/fa";
 import Lottie from "lottie-react";
-import BloodDrop from "../assets/BloodDrop.json";
+import BloodDrop from "../../assets/BloodDrop.json";
 
 const menu = [
   { name: "Home", path: "/" },

@@ -1,4 +1,4 @@
-import animation from "../assets/bloodPressure.json";
+import animation from "../../assets/bloodPressure.json";
 import Lottie from "lottie-react";
 
 import { Link } from "react-router";

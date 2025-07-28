@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.6",
     "@stripe/react-stripe-js": "^3.8.0",
     "@stripe/stripe-js": "^7.6.1",
     "@tailwindcss/vite": "^4.1.11",
@@ -17,6 +18,7 @@
     "axios": "^1.11.0",
     "firebase": "^11.10.0",
     "gsap": "^3.13.0",
+    "jodit-react": "^5.2.19",
     "lottie-react": "^2.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

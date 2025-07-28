@@ -12,14 +12,17 @@ import {
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/axiosPublic";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+   const [role, setRole] = useState(null);
   const axiosPublic = useAxiosPublic();
+ 
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -47,29 +50,29 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("🚀 ~ unsubscribe ~ currentUser:", currentUser);
-
-      if (currentUser) {
-        axiosPublic
-          .post("/add-user", {
-            email: currentUser.email,
-            role: "user",
-            loginCount: 1,
-          })
-          .then((res) => {
-            setUser(currentUser);
-            console.log(res.data);
-          });
+   useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    setUser(currentUser);
+    if (currentUser) {
+      // Get JWT token
+      const token = await currentUser.getIdToken();
+      // Fetch role from backend using plain axios
+      try {
+        const res = await axios.get("http://localhost:5000/get-user-role", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setRole(res.data.role);
+      } catch (err) {
+        setRole(null);
       }
+    } else {
+      setRole(null);
+    }
+    setLoading(false);
+  });
+  return () => unsubscribe();
+}, []);
 
-      setLoading(false);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
 
   const authInfo = {
     user,
@@ -81,6 +84,9 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     updateUser,
     removeUser,
+    role,
+    setRole,
+    
   };
 
   return (

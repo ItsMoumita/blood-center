@@ -6,7 +6,7 @@ import {
   FaLinkedin 
 } from 'react-icons/fa';
 import Lottie from "lottie-react";
-import BloodDrop from "../assets/BloodDrop.json";
+import BloodDrop from "../../assets/BloodDrop.json";
 import { Link } from 'react-router';
 
 const Footer = () => {

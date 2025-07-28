@@ -1,11 +1,10 @@
 import Lottie from "lottie-react";
 import { useContext } from "react";
 import { BiEnvelope, BiKey } from "react-icons/bi";
-import Social from "../components/Social";
-import Title from "../components/Title";
-import { AuthContext } from "../providers/AuthProvider";
+import Title from "../../components/ExtraComponents/Title";
+import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router";
-import loginAnimation from "../assets/loginAnimation.json";
+import loginAnimation from "../../assets/loginAnimation.json";
 import Swal from "sweetalert2";
 
 const Login = () => {
@@ -92,7 +91,7 @@ const Login = () => {
                 />
               </form>
             </div>
-            <Social />
+      
             {/* Animation: 1/3 on md+, hidden on mobile */}
             <div className="lottie w-full md:w-1/3 lg:w-1/2 mx-0 md:mx-20 hidden md:flex">
               <Lottie animationData={loginAnimation} loop={true} />
