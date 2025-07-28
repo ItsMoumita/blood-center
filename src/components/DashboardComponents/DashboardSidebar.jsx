@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../providers/AuthProvider";
 import { FaBars, FaTimes, FaHome, FaPlusCircle, FaListAlt, FaUsers, FaTint, FaEdit } from "react-icons/fa";
 import Loading from "../ExtraComponents/Loading";
+import ThemeToggle from "../ExtraComponents/ThemeToggle";
 
 const donorMenu = [
   { name: "Dashboard Home", path: "/dashboard", icon: <FaHome /> },
@@ -46,12 +47,13 @@ const DashboardSidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 min-h-screen h-full w-64 bg-[#FFE8E8]/20 dark:bg-[#530404]/20 shadow-lg z-40
+          fixed top-0 left-0 min-h-screen h-full w-64 bg-[#FFE8E8] dark:bg-[#530404] shadow-lg z-40
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:w-64
         `}
       >
+        <ThemeToggle></ThemeToggle>
         {/* Close button for mobile */}
         <div className="flex items-center justify-between p-4 lg:hidden">
           <span className="font-bold text-lg text-[#BB2B29] dark:text-[#FFE8E8]">Dashboard</span>
