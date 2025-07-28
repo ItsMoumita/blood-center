@@ -58,15 +58,15 @@ const AllUsers = () => {
           <table className="w-full ">
             <thead >
               <tr className="bg-[#FFE8E8] ">
-                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">User</th>
-                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Email</th>
-                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Role</th>
-                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Status</th>
-                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Actions</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">User</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Email</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Role</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Status</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((u, idx) => (
+              {users.map((u) => (
                 <tr key={u._id} className="group border-b border-b-[#FFE8E8]">
                   <td className="py-3 px-2 md:px-4">
                     <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3">
@@ -77,7 +77,7 @@ const AllUsers = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-2 md:px-4 text-[#FFE8E8] break-all">{u.email}</td>
+                  <td className="py-3 px-2 md:px-4  text-[#FFE8E8] break-all">{u.email}</td>
                   <td className="py-3 px-2 md:px-4">
                     <span className="capitalize px-3 py-1 rounded-full bg-[#ECAAA0]/60 dark:bg-[#BB2B29]/60 text-[#530404] dark:text-[#FFE8E8] font-semibold">
                       {u.role}
