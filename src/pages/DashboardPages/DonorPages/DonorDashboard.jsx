@@ -1,8 +1,10 @@
-// src/pages/DashboardPages/Dashboard.jsx
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { Link } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { FaRegEye } from "react-icons/fa";
+import { RiEdit2Fill } from "react-icons/ri";
+import { MdDeleteForever } from "react-icons/md";
 
 const DonorDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -18,56 +20,99 @@ const DonorDashboard = () => {
   }, [user, axiosSecure]);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Welcome, {user?.displayName || "Donor"}!</h2>
-      {requests.length > 0 && (
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Your Recent Donation Requests</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full border">
-              <thead>
-                <tr>
-                  <th>Recipient Name</th>
-                  <th>Location</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Blood Group</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {requests.map((req) => (
-                  <tr key={req._id}>
-                    <td>{req.recipientName}</td>
-                    <td>{req.recipientDistrict}, {req.recipientUpazila}</td>
-                    <td>{req.donationDate}</td>
-                    <td>{req.donationTime}</td>
-                    <td>{req.bloodGroup}</td>
-                    <td>{req.donationStatus}</td>
-                    <td>
-                      <Link to={`/dashboard/donation-request/${req._id}`} className="btn btn-xs">View</Link>
-                      <Link to={`/dashboard/edit-donation-request/${req._id}`} className="btn btn-xs ml-1">Edit</Link>
-                      <button className="btn btn-xs ml-1" onClick={() => {/* handle delete */}}>Delete</button>
-                      {/* Show Done/Cancel if inprogress */}
-                      {req.donationStatus === "inprogress" && (
-                        <>
-                          <button className="btn btn-xs ml-1" onClick={() => {/* handle done */}}>Done</button>
-                          <button className="btn btn-xs ml-1" onClick={() => {/* handle cancel */}}>Cancel</button>
-                        </>
-                      )}
-                    </td>
+    <div className="p-2 sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
+      <div className="w-full max-w-6xl mx-auto mt-4">
+        <h2 className="text-2xl font-bold mb-4 text-[#FFE8E8] text-center">
+          Welcome, {user?.displayName || "Donor"}!
+        </h2>
+        {requests.length > 0 && (
+          <div>
+            <h3 className="text-lg font-semibold mb-2 text-[#FFE8E8] text-center">
+              Your Recent Donation Requests
+            </h3>
+            <div className="w-full">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-[#FFE8E8]">
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Recipient</th>
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Location</th>
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Date</th>
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Time</th>
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Blood Group</th>
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Status</th>
+                    <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {requests.map((req) => (
+                    <tr key={req._id} className="group border-b border-b-[#FFE8E8]">
+                      <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8] font-semibold">
+                        {req.recipientName}
+                      </td>
+                      <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                        {req.recipientDistrict}, {req.recipientUpazila}
+                      </td>
+                      <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                        {req.donationDate}
+                      </td>
+                      <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                        {req.donationTime}
+                      </td>
+                      <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                        {req.bloodGroup}
+                      </td>
+                      <td className="py-3 px-2 md:px-4">
+                        <span className={`px-3 py-1 rounded-full text-xs font-semibold
+                          ${req.donationStatus === "pending"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : req.donationStatus === "inprogress"
+                            ? "bg-blue-100 text-blue-700"
+                            : req.donationStatus === "done"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                          }`}>
+                          {req.donationStatus}
+                        </span>
+                      </td>
+                      <td className="py-3 px-2 md:px-4 z-50">
+                        <div className="flex flex-col md:flex-row gap-1">
+                          <Link to={`/dashboard/donation-request/${req._id}`} className="btn btn-xs bg-white text-xl text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                            <FaRegEye />
+                          </Link>
+                          <Link to={`/dashboard/edit-donation-request/${req._id}`} className="btn btn-xs text-xl bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                            <RiEdit2Fill />
+                          </Link>
+                          <button className="btn btn-xs bg-white text-[#BB2B29] border-none text-xl hover:bg-[#ECAAA0]">
+                            <MdDeleteForever />
+                          </button>
+                          {req.donationStatus === "inprogress" && (
+                            <>
+                              <button className="btn btn-xs bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                                Done
+                              </button>
+                              <button className="btn btn-xs bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                                Cancel
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="flex justify-center">
+              <Link to="/dashboard/my-donation-requests" className="btn mt-4 bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                View My All Requests
+              </Link>
+            </div>
           </div>
-          <Link to="/dashboard/my-donation-requests" className="btn mt-4">View My All Requests</Link>
-        </div>
-      )}
-      {requests.length === 0 && (
-        <div className="text-gray-500 mt-8">You have not made any donation requests yet.</div>
-      )}
+        )}
+        {requests.length === 0 && (
+          <div className="text-gray-300 mt-8 text-center">You have not made any donation requests yet.</div>
+        )}
+      </div>
     </div>
   );
 };

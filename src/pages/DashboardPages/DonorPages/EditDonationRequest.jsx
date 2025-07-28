@@ -15,11 +15,16 @@ const EditDonationRequest = () => {
   const [filteredUpazilas, setFilteredUpazilas] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const navigate = useNavigate();
-  const {role} = useContext(AuthContext);
+  const { role } = useContext(AuthContext);
+
   useEffect(() => {
     axiosSecure.get(`/donation-requests/${id}`).then(res => {
       setRequest(res.data);
-      setSelectedDistrict(res.data.recipientDistrict);
+      // Find district id by name for select value
+      const districtObj = res.data.recipientDistrict
+        ? districts.find(d => d.name === res.data.recipientDistrict)
+        : null;
+      setSelectedDistrict(districtObj ? districtObj.id : "");
     });
     fetch("/districts.json")
       .then((res) => res.json())
@@ -59,66 +64,118 @@ const EditDonationRequest = () => {
     };
     await axiosSecure.patch(`/donation-requests/${id}`, update);
     Swal.fire("Success", "Donation request updated!", "success");
-   
-    if(role === 'donor')
-    navigate("/dashboard/my-donation-requests");
-   else if(role === 'admin')
-    navigate("/dashboard/all-blood-donation-request")
+    if (role === 'donor')
+      navigate("/dashboard/my-donation-requests");
+    else if (role === 'admin')
+      navigate("/dashboard/all-blood-donation-request");
   };
 
-  if (!request) return <div>Loading...</div>;
+  if (!request) return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white">
+      <div className="text-xl">Loading...</div>
+    </div>
+  );
+
+  // Find district id by name for select value
+  const districtObj = districts.find(d => d.name === request.recipientDistrict);
+  const districtId = districtObj ? districtObj.id : "";
+
+  // Find upazila id by name for select value
+  const upazilaObj = upazilas.find(u => u.name === request.recipientUpazila);
+  const upazilaId = upazilaObj ? upazilaObj.id : "";
 
   return (
-    <div className="p-4 max-w-lg mx-auto">
-      <h2 className="text-xl font-bold mb-4">Edit Donation Request</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label>Recipient Name</label>
-          <input name="recipientName" defaultValue={request.recipientName} required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Recipient District</label>
-          <select name="recipientDistrict" required className="input input-bordered w-full" value={selectedDistrict} onChange={handleDistrictChange}>
-            <option value="">Select District</option>
-            {districts.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-          </select>
-        </div>
-        <div>
-          <label>Recipient Upazila</label>
-          <select name="recipientUpazila" required className="input input-bordered w-full" defaultValue={request.recipientUpazila}>
-            <option value="">Select Upazila</option>
-            {filteredUpazilas.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
-          </select>
-        </div>
-        <div>
-          <label>Hospital Name</label>
-          <input name="hospitalName" defaultValue={request.hospitalName} required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Full Address Line</label>
-          <input name="addressLine" defaultValue={request.addressLine} required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Blood Group</label>
-          <select name="bloodGroup" required className="input input-bordered w-full" defaultValue={request.bloodGroup}>
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
+      <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold mb-8 text-center text-[#BB2B29] dark:text-[#FFE8E8]">Edit Donation Request</h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <input
+            name="recipientName"
+            defaultValue={request.recipientName}
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Recipient Name"
+          />
+          {/* District and Upazila side by side on large, stacked on small */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <select
+              name="recipientDistrict"
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              value={selectedDistrict || districtId}
+              onChange={handleDistrictChange}
+            >
+              <option value="">Select District</option>
+              {districts.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+            </select>
+            <select
+              name="recipientUpazila"
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              value={upazilaId}
+              onChange={() => {}} // prevent React warning, but upazila is set by select value
+            >
+              <option value="">Select Upazila</option>
+              {filteredUpazilas.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
+            </select>
+          </div>
+          <input
+            name="hospitalName"
+            defaultValue={request.hospitalName}
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Hospital Name"
+          />
+          <input
+            name="addressLine"
+            defaultValue={request.addressLine}
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Full Address Line"
+          />
+          <select
+            name="bloodGroup"
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+            defaultValue={request.bloodGroup}
+          >
             <option value="">Select Blood Group</option>
             {bloodGroups.map(bg => <option key={bg} value={bg}>{bg}</option>)}
           </select>
-        </div>
-        <div>
-          <label>Donation Date</label>
-          <input type="date" name="donationDate" defaultValue={request.donationDate} required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Donation Time</label>
-          <input type="time" name="donationTime" defaultValue={request.donationTime} required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Request Message</label>
-          <textarea name="requestMessage" defaultValue={request.requestMessage} required className="input input-bordered w-full" />
-        </div>
-        <button type="submit" className="btn btn-primary">Update</button>
-      </form>
+          {/* Donation Date and Time side by side on large, stacked on small */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <input
+              type="date"
+              name="donationDate"
+              defaultValue={request.donationDate}
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              placeholder="Donation Date"
+            />
+            <input
+              type="time"
+              name="donationTime"
+              defaultValue={request.donationTime}
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              placeholder="Donation Time"
+            />
+          </div>
+          <textarea
+            name="requestMessage"
+            defaultValue={request.requestMessage}
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Request Message"
+          />
+          <button
+            type="submit"
+            className="w-full py-4 rounded-lg bg-[#E53935] text-white font-bold uppercase tracking-wider text-lg hover:bg-[#bb2b29] transition"
+          >
+            Update
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

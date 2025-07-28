@@ -12,28 +12,73 @@ const ViewDonationRequest = () => {
     axiosSecure.get(`/donation-requests/${id}`).then(res => setRequest(res.data));
   }, [id, axiosSecure]);
 
-  if (!request) return <div>Loading...</div>;
+  if (!request) return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white">
+      <div className="text-xl">Loading...</div>
+    </div>
+  );
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">Donation Request Details</h2>
-      <div className="space-y-2">
-        <div><b>Recipient Name:</b> {request.recipientName}</div>
-        <div><b>Recipient Location:</b> {request.recipientDistrict}, {request.recipientUpazila}</div>
-        <div><b>Hospital:</b> {request.hospitalName}</div>
-        <div><b>Address:</b> {request.addressLine}</div>
-        <div><b>Blood Group:</b> {request.bloodGroup}</div>
-        <div><b>Date:</b> {request.donationDate}</div>
-        <div><b>Time:</b> {request.donationTime}</div>
-        <div><b>Status:</b> {request.donationStatus}</div>
-        <div><b>Request Message:</b> {request.requestMessage}</div>
-        {request.donorInfo && (
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white py-8">
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-[#FFE8E8]">
+        Donation Request Details
+      </h2>
+      <div className="w-full max-w-xl bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
+        <div className="space-y-4 text-base">
           <div>
-            <b>Donor Info:</b> {request.donorInfo.name} ({request.donorInfo.email})
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Recipient Name:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.recipientName}</span>
           </div>
-        )}
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Recipient Location:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.recipientDistrict}, {request.recipientUpazila}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Hospital:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.hospitalName}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Address:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.addressLine}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Blood Group:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.bloodGroup}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Date:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.donationDate}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Time:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.donationTime}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Status:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.donationStatus}</span>
+          </div>
+          <div>
+            <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Request Message:</span>
+            <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.requestMessage}</span>
+          </div>
+          {request.donorInfo && (
+            <div>
+              <span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Donor Info:</span>
+              <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">
+                {request.donorInfo.name} ({request.donorInfo.email})
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            className="btn bg-[#BB2B29] text-white dark:bg-[#FFE8E8] dark:text-[#530404] font-bold px-8 py-2 rounded-lg hover:bg-[#ECAAA0] hover:text-[#530404] transition"
+            onClick={() => navigate(-1)}
+          >
+            Back
+          </button>
+        </div>
       </div>
-      <button className="btn mt-4" onClick={() => navigate(-1)}>Back</button>
     </div>
   );
 };

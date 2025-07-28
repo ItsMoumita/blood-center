@@ -1,4 +1,3 @@
-// src/pages/DashboardPages/CreateDonationRequest.jsx
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -16,7 +15,7 @@ const CreateDonationRequest = () => {
   const [upazilas, setUpazilas] = useState([]);
   const [filteredUpazilas, setFilteredUpazilas] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [status, setStatus] = useState("active"); // Assume active by default
+  const [status, setStatus] = useState("active");
 
   useEffect(() => {
     fetch("/districts.json")
@@ -33,7 +32,6 @@ const CreateDonationRequest = () => {
         setUpazilas(upazilasData);
       });
 
-    // Optionally, fetch user status from backend
     axiosSecure.get("/get-user-role").then(res => setStatus(res.data.status));
   }, []);
 
@@ -69,64 +67,101 @@ const CreateDonationRequest = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Create Donation Request</h2>
-      <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
-        <div>
-          <label>Requester Name</label>
-          <input type="text" value={user.displayName} readOnly className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Requester Email</label>
-          <input type="email" value={user.email} readOnly className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Recipient Name</label>
-          <input name="recipientName" required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Recipient District</label>
-          <select name="recipientDistrict" required className="input input-bordered w-full" onChange={handleDistrictChange}>
-            <option value="">Select District</option>
-            {districts.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-          </select>
-        </div>
-        <div>
-          <label>Recipient Upazila</label>
-          <select name="recipientUpazila" required className="input input-bordered w-full">
-            <option value="">Select Upazila</option>
-            {filteredUpazilas.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
-          </select>
-        </div>
-        <div>
-          <label>Hospital Name</label>
-          <input name="hospitalName" required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Full Address Line</label>
-          <input name="addressLine" required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Blood Group</label>
-          <select name="bloodGroup" required className="input input-bordered w-full">
+    <div className="min-h-screen w-full bg-gradient-to-b p-4 from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
+      <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold mb-8 text-center text-[#BB2B29] dark:text-[#FFE8E8]">Create Donation Request</h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <input
+            type="text"
+            value={user.displayName}
+            readOnly
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Requester Name"
+          />
+          <input
+            type="email"
+            value={user.email}
+            readOnly
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Requester Email"
+          />
+          <input
+            name="recipientName"
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Recipient Name"
+          />
+   
+          <div className="flex flex-row gap-4">
+            <select
+              name="recipientDistrict"
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              onChange={handleDistrictChange}
+              value={selectedDistrict}
+            >
+              <option value="">Select District</option>
+              {districts.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+            </select>
+            <select
+              name="recipientUpazila"
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+            >
+              <option value="">Select Upazila</option>
+              {filteredUpazilas.map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
+            </select>
+          </div>
+          <input
+            name="hospitalName"
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Hospital Name"
+          />
+          <input
+            name="addressLine"
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Full Address Line"
+          />
+          <select
+            name="bloodGroup"
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+          >
             <option value="">Select Blood Group</option>
             {bloodGroups.map(bg => <option key={bg} value={bg}>{bg}</option>)}
           </select>
-        </div>
-        <div>
-          <label>Donation Date</label>
-          <input type="date" name="donationDate" required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Donation Time</label>
-          <input type="time" name="donationTime" required className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Request Message</label>
-          <textarea name="requestMessage" required className="input input-bordered w-full" />
-        </div>
-        <button type="submit" className="btn btn-primary">Request</button>
-      </form>
+          <div className="flex flex-row gap-4">
+            <input
+              type="date"
+              name="donationDate"
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              placeholder="Donation Date"
+            />
+            <input
+              type="time"
+              name="donationTime"
+              required
+              className="flex-1 bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] focus:outline-none"
+              placeholder="Donation Time"
+            />
+          </div>
+          <textarea
+            name="requestMessage"
+            required
+            className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
+            placeholder="Request Message"
+          />
+          <button
+            type="submit"
+            className="w-full py-4 rounded-lg bg-[#E53935] dark:bg-[#530404] text-white font-bold uppercase tracking-wider text-lg hover:bg-[#bb2b29e1]  transition"
+          >
+            Request
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

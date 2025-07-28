@@ -1,8 +1,10 @@
-// src/pages/DashboardPages/MyDonationRequests.jsx
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, Fragment } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router";
+import { FaRegEye } from "react-icons/fa";
+import { RiEdit2Fill } from "react-icons/ri";
+import { MdDeleteForever } from "react-icons/md";
 
 const statusOptions = ["all", "pending", "inprogress", "done", "canceled"];
 
@@ -24,68 +26,115 @@ const MyDonationRequests = () => {
           setTotal(res.data.total);
         });
     }
-  }, [user, status, page, axiosSecure]);
+  }, [user, status, page]);
 
   const totalPages = Math.ceil(total / limit);
 
+  // You can add your own handleDelete, handleStatusChange, etc. if needed
+
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">My Donation Requests</h2>
-      <div className="mb-2">
-        <label>Status: </label>
-        <select value={status} onChange={e => { setStatus(e.target.value); setPage(1); }}>
-          {statusOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-        </select>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border">
-          <thead>
-            <tr>
-              <th>Recipient Name</th>
-              <th>Location</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Blood Group</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req) => (
-              <tr key={req._id}>
-                <td>{req.recipientName}</td>
-                <td>{req.recipientDistrict}, {req.recipientUpazila}</td>
-                <td>{req.donationDate}</td>
-                <td>{req.donationTime}</td>
-                <td>{req.bloodGroup}</td>
-                <td>{req.donationStatus}</td>
-                <td>
-                  <Link to={`/dashboard/donation-request/${req._id}`} className="btn btn-xs">View</Link>
-                  <Link to={`/dashboard/edit-donation-request/${req._id}`} className="btn btn-xs ml-1">Edit</Link>
-                  <button className="btn btn-xs ml-1" onClick={() => {/* handle delete */}}>Delete</button>
-                  {req.donationStatus === "inprogress" && (
-                    <>
-                      <button className="btn btn-xs ml-1" onClick={() => {/* handle done */}}>Done</button>
-                      <button className="btn btn-xs ml-1" onClick={() => {/* handle cancel */}}>Cancel</button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {/* Pagination */}
-      <div className="mt-4 flex gap-2">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            className={`btn btn-xs ${page === i + 1 ? "btn-active" : ""}`}
-            onClick={() => setPage(i + 1)}
+    <div className="p-2 sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
+      <div className="w-full max-w-6xl mx-auto mt-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+          <h2 className="text-2xl font-extrabold text-[#FFE8E8] tracking-tight">
+            My Donation Requests
+          </h2>
+          <select
+            value={status}
+            onChange={e => { setStatus(e.target.value); setPage(1); }}
+            className="select select-bordered w-full sm:w-48 bg-white dark:bg-[#f3f3f3] text-[#530404] dark:text-[#BB2B29] border-[#BB2B29] dark:border-[#FFE8E8]"
           >
-            {i + 1}
-          </button>
-        ))}
+            {statusOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+          </select>
+        </div>
+        <div className="w-full">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-[#FFE8E8]">
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Recipient</th>
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Location</th>
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Date</th>
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Time</th>
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Blood Group</th>
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Status</th>
+                <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests.map((req) => (
+                <tr key={req._id} className="group border-b border-b-[#FFE8E8]">
+                  <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8] font-semibold">
+                    {req.recipientName}
+                  </td>
+                  <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                    {req.recipientDistrict}, {req.recipientUpazila}
+                  </td>
+                  <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                    {req.donationDate}
+                  </td>
+                  <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                    {req.donationTime}
+                  </td>
+                  <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
+                    {req.bloodGroup}
+                  </td>
+                  <td className="py-3 px-2 md:px-4">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold
+                      ${req.donationStatus === "pending"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : req.donationStatus === "inprogress"
+                        ? "bg-blue-100 text-blue-700"
+                        : req.donationStatus === "done"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                      }`}>
+                      {req.donationStatus}
+                    </span>
+                  </td>
+                  <td className="py-3 px-2 md:px-4 z-50">
+                    <div className="flex flex-col md:flex-row gap-1">
+                      <Link to={`/dashboard/donation-request/${req._id}`} className="btn btn-xs bg-white text-xl text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                        <FaRegEye />
+                      </Link>
+                      <Link to={`/dashboard/edit-donation-request/${req._id}`} className="btn btn-xs text-xl bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                        <RiEdit2Fill />
+                      </Link>
+                      <button className="btn btn-xs bg-white text-[#BB2B29] border-none text-xl hover:bg-[#ECAAA0]">
+                        <MdDeleteForever />
+                      </button>
+                      {req.donationStatus === "inprogress" && (
+                        <>
+                          <button className="btn btn-xs bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                            Done
+                          </button>
+                          <button className="btn btn-xs bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
+                            Cancel
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* Pagination */}
+        <div className="mt-8 md:mt-16 flex flex-wrap gap-2 justify-center">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`btn btn-s rounded-xl font-bold border-none ${
+                page === i + 1
+                  ? "bg-white/70 text-[#BB2B29] dark:bg-[#FFE8E8] dark:text-[#530404]"
+                  : "bg-[#ECAAA0] text-[#530404] dark:bg-[#BB2B29] dark:text-[#FFE8E8]"
+              }`}
+              onClick={() => setPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
