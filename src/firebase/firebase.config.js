@@ -10,7 +10,7 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_messagingSenderId,
   appId: import.meta.env.VITE_appId,
 };
-console.log("🚀 ~ firebaseConfig:", firebaseConfig)
+//console.log("🚀 ~ firebaseConfig:", firebaseConfig)
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

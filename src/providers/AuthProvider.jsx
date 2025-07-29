@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
       const token = await currentUser.getIdToken();
       // Fetch role from backend using plain axios
       try {
-        const res = await axios.get("http://localhost:5000/get-user-role", {
+        const res = await axios.get("https://blood-donation-server-umber-iota.vercel.app/get-user-role", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setRole(res.data.role);
@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
   return () => unsubscribe();
 }, []);
 
-console.log(user, role);
+//console.log(user, role);
   const authInfo = {
     user,
     loading,

@@ -6,7 +6,7 @@ import VolunteerDashboard from "./VolunteerPages/VolunteerDashboard";
 
 const Dashboard = () => {
   const { role, loading } = useContext(AuthContext);
-console.log(role)
+//console.log(role)
   if (loading) return <div>Loading...</div>;
 
   if (role === "admin") return <AdminDashboard />;

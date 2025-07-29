@@ -38,7 +38,7 @@ const Header = () => {
       });
   };
 
-  // console.log("🚀 ~ Header ~ user:", user);
+  // //console.log("🚀 ~ Header ~ user:", user);
 
   return (
     <nav className="sticky top-0 bg-[#F5F5F5] dark:bg-[#FFE8E8] border-b-2 border-[#BB2B29] dark:border-[#530404] shadow-lg z-50 ">

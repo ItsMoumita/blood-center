@@ -35,9 +35,9 @@ const VolunteerDashboard = () => {
   }, []);
 
   return (
-    <div className="p-4 min-h-screen bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000]">
-      <h2 className="text-2xl font-bold mb-8 text-[#FFE8E8]">Welcome, {user?.displayName || "Volunteer"}!</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="p-4 w-full min-h-screen bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000]">
+      <h2 className=" mx-auto text-2xl font-bold mb-8 text-[#FFE8E8]">Welcome, {user?.displayName || "Volunteer"}!</h2>
+      <div className="w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         {statCards.map(card => (
           <div
             key={card.key}

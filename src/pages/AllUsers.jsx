@@ -17,7 +17,7 @@ export default function AllUsers() {
       return data;
     },
   });
-  console.log("🚀 ~ AllUsers ~ users:", users);
+  //console.log("🚀 ~ AllUsers ~ users:", users);
 
   const axiosSecure = useAxiosSecure();
 
@@ -32,7 +32,7 @@ export default function AllUsers() {
         if (data.modifiedCount) {
           alert("update user role successfully");
         }
-        console.log(data);
+        //console.log(data);
       });
   };
 

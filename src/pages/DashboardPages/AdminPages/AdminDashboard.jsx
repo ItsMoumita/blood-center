@@ -36,7 +36,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     axiosSecure.get("/admin-dashboard-stats").then(res => setStats(res.data));
   }, []);
- console.log(stats)
+ //console.log(stats)
   return (
     <div className="w-full p-4 md:8 min-h-screen bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000]">
       <h2 className="text-2xl text-center font-bold mb-8 text-[#FFE8E8]">Welcome, {user?.displayName || "Admin"}!</h2>

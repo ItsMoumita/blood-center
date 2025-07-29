@@ -3,7 +3,7 @@ import Header from "../../components/HomeComponents/Header";
 
 const Error = () => {
   const error = useRouteError();
-  console.log(error);
+  //console.log(error);
   return (
     <div>
       <Header></Header>
