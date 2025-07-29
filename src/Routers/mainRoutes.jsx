@@ -21,6 +21,9 @@ import RequireVolunteerOrAdmin from "./RequireVolunteerOrAdmin";
 import AllBloodDonationRequestsRoleSwitch from "../components/ExtraComponents/AllBloodDonationRequestsRoleSwitch";
 import RequireAdmin from "./RequireAdmin";
 import FundingPage from "../pages/DashboardPages/DonorPages/FundingPage";
+import DonorSearch from "../pages/HomePages/DonorSearch";
+import PendingDonationRequests from "../pages/HomePages/PendingDonationRequest";
+import DonationRequestDetails from "../pages/HomePages/DonationRequestDetails";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -32,6 +35,18 @@ const mainRoutes = createBrowserRouter([
       { path: "blog", element: <Blog /> },
       { path: "login", element: <Login /> },
       { path: "registration", element: <Register /> },
+      {
+        path: "search",
+        element: <DonorSearch></DonorSearch>
+      },
+      {
+        path: "/pending-donation-requests",
+        element: <PendingDonationRequests />
+      },
+      {
+        path: "/donation-request/:id",
+        element: <DonationRequestDetails />
+      },
     ],
   },
   {

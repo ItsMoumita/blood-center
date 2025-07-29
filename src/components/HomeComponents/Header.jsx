@@ -11,7 +11,7 @@ import BloodDrop from "../../assets/BloodDrop.json";
 
 const menu = [
   { name: "Home", path: "/" },
-  { name: "Donation Requests", path: "/donation-requests" },
+  { name: "Donation Requests", path: "/pending-donation-requests" },
   { name: "Blog", path: "/blog" },
 ];
 

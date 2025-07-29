@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import JoditEditor from "jodit-react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const AddBlog = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,6 +12,7 @@ const AddBlog = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [content, setContent] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleImageUpload = async (e) => {
     setUploading(true);
@@ -28,11 +30,14 @@ const AddBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     await axiosSecure.post("/blogs", { title, thumbnail, content });
     Swal.fire("Success", "Blog created!", "success");
+    setLoading(false)
     navigate("/dashboard/content-management");
   };
-
+ 
+  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
       <div className="w-full max-w-2xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
