@@ -12,58 +12,60 @@ import CreateDonationRequest from "../pages/DashboardPages/DonorPages/CreateDona
 import EditDonationRequest from "../pages/DashboardPages/DonorPages/EditDonationRequest";
 import ViewDonationRequest from "../pages/DashboardPages/DonorPages/ViewDonation";
 import Dashboard from "../pages/DashboardPages/Dashboard";
-import RequireAdmin from "./RequireAdmin";
 import AllUsers from "../pages/DashboardPages/AdminPages/AllUsers";
-import AllBloodDonationRequests from "../pages/DashboardPages/AdminPages/AllBloodDonationRequests";
 import AddBlog from "../pages/DashboardPages/AdminPages/AddBlog";
-import ContentManagement from "../pages/DashboardPages/AdminPages/ContentManagement";
+import Blog from "../pages/HomePages/Blog";
+import Profile from "../pages/DashboardPages/Profile";
+import ContentManagementRoleSwitch from "../components/ExtraComponents/ContentManagementRoleSwitch";
+import RequireVolunteerOrAdmin from "./RequireVolunteerOrAdmin";
+import AllBloodDonationRequestsRoleSwitch from "../components/ExtraComponents/AllBloodDonationRequestsRoleSwitch";
+import RequireAdmin from "./RequireAdmin";
+import FundingPage from "../pages/DashboardPages/DonorPages/FundingPage";
 
 const mainRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout></RootLayout>,
-    errorElement: <Error></Error>,
+    element: <RootLayout />,
+    errorElement: <Error />,
     children: [
-      {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "login",
-        element: <Login></Login>,
-      },
-      {
-        path: "registration",
-        element: <Register></Register>,
-      },
+      { path: "/", element: <Home /> },
+      { path: "blog", element: <Blog /> },
+      { path: "login", element: <Login /> },
+      { path: "registration", element: <Register /> },
     ],
   },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
+      { index: true, element: <Dashboard /> },
+      { path: "profile", element: <Profile /> },
+      { path: "my-donation-requests", element: <MyDonationRequests /> },
+      { path: "create-donation-request", element: <CreateDonationRequest /> },
+      { path: "edit-donation-request/:id", element: <EditDonationRequest /> },
+      { path: "donation-request/:id", element: <ViewDonationRequest /> },
       {
-        index: true,
-        element: <Dashboard />,
+        path: "/dashboard/funding",
+        element: <FundingPage></FundingPage>
       },
       {
-        path: "/dashboard/my-donation-requests",
-        element: <MyDonationRequests />,
+        path: "all-blood-donation-request",
+        element: (
+          <RequireVolunteerOrAdmin>
+            <AllBloodDonationRequestsRoleSwitch />
+          </RequireVolunteerOrAdmin>
+        ),
       },
       {
-        path: "/dashboard/create-donation-request",
-        element: <CreateDonationRequest />,
+        path: "content-management",
+        element: (
+          <RequireVolunteerOrAdmin>
+            <ContentManagementRoleSwitch />
+          </RequireVolunteerOrAdmin>
+        ),
       },
       {
-        path: "/dashboard/edit-donation-request/:id",
-        element: <EditDonationRequest />,
-      },
-      {
-        path: "/dashboard/donation-request/:id",
-        element: <ViewDonationRequest></ViewDonationRequest>
-      },
-      {
-        path: "/dashboard/all-users",
+        path: "all-users",
         element: (
           <RequireAdmin>
             <AllUsers />
@@ -71,31 +73,13 @@ const mainRoutes = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-blood-donation-request",
-        element: (
-          <RequireAdmin>
-            <AllBloodDonationRequests />
-          </RequireAdmin>
-        )
-      },
-      {
-        path: "/dashboard/content-management",
-        element: (
-          <RequireAdmin>
-            <ContentManagement />
-          </RequireAdmin>
-        )
-      },
-      {
-        path: "/dashboard/content-management/add-blog",
+        path: "content-management/add-blog",
         element: (
           <RequireAdmin>
             <AddBlog />
           </RequireAdmin>
-        )
+        ),
       },
-
-
     ],
   },
 ]);

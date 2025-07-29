@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../providers/AuthProvider";
-import { FaBars, FaTimes, FaHome, FaPlusCircle, FaListAlt, FaUsers, FaTint, FaEdit } from "react-icons/fa";
+import { FaBars, FaTimes, FaHome, FaPlusCircle, FaListAlt, FaUsers, FaTint, FaEdit} from "react-icons/fa";
+import { LiaDonateSolid } from "react-icons/lia";
 import Loading from "../ExtraComponents/Loading";
 import ThemeToggle from "../ExtraComponents/ThemeToggle";
 
@@ -9,6 +10,9 @@ const donorMenu = [
   { name: "Dashboard Home", path: "/dashboard", icon: <FaHome /> },
   { name: "My Donation Requests", path: "/dashboard/my-donation-requests", icon: <FaListAlt /> },
   { name: "Create Donation Request", path: "/dashboard/create-donation-request", icon: <FaPlusCircle /> },
+  {
+    name: "Donate Now" , path: "/dashboard/funding", icon: <LiaDonateSolid />
+  }
 ];
 
 const adminMenu = [
@@ -20,12 +24,14 @@ const adminMenu = [
 
 const volunteerMenu = [
   { name: "Dashboard Home", path: "/dashboard", icon: <FaHome /> },
-  // Add more volunteer-specific items here
+  { name: "All Blood Donation Requests", path: "/dashboard/all-blood-donation-request", icon: <FaTint /> },
+   { name: "Content Management", path: "/dashboard/content-management", icon: <FaEdit /> },
+
 ];
 
 const DashboardSidebar = () => {
   const [open, setOpen] = useState(false);
-  const { role, loading } = useContext(AuthContext);
+  const { user, role, loading } = useContext(AuthContext);
 
   let menu = donorMenu;
   if (role === "admin") menu = adminMenu;
@@ -65,6 +71,31 @@ const DashboardSidebar = () => {
             <FaTimes size={24} />
           </button>
         </div>
+
+        {/* Avatar and Profile Link */}
+        <div className="flex flex-col items-center mt-6 mb-2">
+          <img
+            src={user?.photoURL || user?.photo || "/default-avatar.png"}
+            alt="avatar"
+            className="w-18 h-18 rounded-full border-3 border-[#BB2B29] dark:border-[#FFE8E8] shadow-lg object-cover"
+          />
+          <div className="mt-2 font-bold text-[#530404] dark:text-[#FFE8E8] text-lg text-center">
+            {user?.displayName || user?.name || "User"}
+          </div>
+          <NavLink
+            to="/dashboard/profile"
+            className={({ isActive }) =>
+              `mt-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                isActive
+                  ? "bg-[#BB2B29] text-white dark:bg-[#FFE8E8] dark:text-[#530404] shadow"
+                  : "text-[#530404] dark:text-[#FFE8E8] hover:bg-[#ECAAA0] hover:text-[#BB2B29] dark:hover:bg-[#BB2B29] dark:hover:text-[#FFE8E8]"
+              }`
+            }
+          >
+            Profile
+          </NavLink>
+        </div>
+
         <nav className="mt-8 flex flex-col gap-2">
           {menu.map((item) => (
             <NavLink
