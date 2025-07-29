@@ -5,6 +5,7 @@ import { FaBars, FaTimes, FaHome, FaPlusCircle, FaListAlt, FaUsers, FaTint, FaEd
 import { LiaDonateSolid } from "react-icons/lia";
 import Loading from "../ExtraComponents/Loading";
 import ThemeToggle from "../ExtraComponents/ThemeToggle";
+import { RingLoader } from "react-spinners";
 
 const donorMenu = [
   { name: "Dashboard Home", path: "/dashboard", icon: <FaHome /> },
@@ -37,7 +38,11 @@ const DashboardSidebar = () => {
   if (role === "admin") menu = adminMenu;
   else if (role === "volunteer") menu = volunteerMenu;
 
-  if (loading) return <Loading />;
+  if (loading) return (
+    <div className="flex items-center bg-[#FFE8E8] dark:bg-[#530404]">
+      <RingLoader color="#BB2B29" size={90} />
+    </div>
+  );
 
   return (
     <>

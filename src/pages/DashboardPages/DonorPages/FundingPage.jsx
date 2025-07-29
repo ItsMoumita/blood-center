@@ -3,6 +3,7 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import Swal from "sweetalert2";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -31,6 +32,7 @@ const FundingForm = ({ onSuccess }) => {
     } else if (result.paymentIntent.status === "succeeded") {
       // 3. Save funding to DB
       await axiosSecure.post("/fundings", { amount: parseFloat(amount) });
+      Swal.fire("Success", "Donation Successful!", "success");
       setLoading(false);
       setAmount("");
       onSuccess();

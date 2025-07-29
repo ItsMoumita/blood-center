@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { FaRegEye } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const statusOptions = ["all", "pending", "inprogress", "done", "canceled"];
 
@@ -30,7 +31,23 @@ const MyDonationRequests = () => {
 
   const totalPages = Math.ceil(total / limit);
 
-  // You can add your own handleDelete, handleStatusChange, etc. if needed
+  const handleDelete = (id) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#BB2B29",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      await axiosSecure.delete(`/donation-requests/${id}`);
+      setRequests((prev) => prev.filter((req) => req._id !== id));
+      Swal.fire("Deleted!", "Request has been deleted.", "success");
+    }
+  });
+};
 
   return (
     <div className="p-2 sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
@@ -83,10 +100,10 @@ const MyDonationRequests = () => {
                       ${req.donationStatus === "pending"
                         ? "bg-yellow-100 text-yellow-700"
                         : req.donationStatus === "inprogress"
-                        ? "bg-blue-100 text-blue-700"
-                        : req.donationStatus === "done"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
+                          ? "bg-blue-100 text-blue-700"
+                          : req.donationStatus === "done"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
                       }`}>
                       {req.donationStatus}
                     </span>
@@ -99,7 +116,10 @@ const MyDonationRequests = () => {
                       <Link to={`/dashboard/edit-donation-request/${req._id}`} className="btn btn-xs text-xl bg-white text-[#BB2B29] border-none hover:bg-[#ECAAA0]">
                         <RiEdit2Fill />
                       </Link>
-                      <button className="btn btn-xs bg-white text-[#BB2B29] border-none text-xl hover:bg-[#ECAAA0]">
+                      <button
+                        className="btn btn-xs bg-white text-[#BB2B29] border-none text-xl hover:bg-[#ECAAA0]"
+                        onClick={() => handleDelete(req._id)}
+                      >
                         <MdDeleteForever />
                       </button>
                       {req.donationStatus === "inprogress" && (
@@ -124,11 +144,10 @@ const MyDonationRequests = () => {
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
-              className={`btn btn-s rounded-xl font-bold border-none ${
-                page === i + 1
+              className={`btn btn-s rounded-xl font-bold border-none ${page === i + 1
                   ? "bg-white/70 text-[#BB2B29] dark:bg-[#FFE8E8] dark:text-[#530404]"
                   : "bg-[#ECAAA0] text-[#530404] dark:bg-[#BB2B29] dark:text-[#FFE8E8]"
-              }`}
+                }`}
               onClick={() => setPage(i + 1)}
             >
               {i + 1}
