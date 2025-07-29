@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { RiEdit2Fill } from "react-icons/ri";
+import Loading from "../../components/ExtraComponents/Loading";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -16,7 +17,6 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Local state for form fields (only used in edit mode)
   const [formState, setFormState] = useState({
     name: "",
     photo: "",
@@ -25,22 +25,17 @@ const Profile = () => {
     blood_group: "",
   });
 
-  // Load profile and geo data
   useEffect(() => {
-    if (!user) return; // Wait for user to be loaded
-    let loadedProfile = null;
-    let loadedDistricts = [];
-    let loadedUpazilas = [];
-
+    if (!user) return;
     const fetchAll = async () => {
       const [profileRes, districtsRes, upazilasRes] = await Promise.all([
         axiosSecure.get("/user-profile"),
         fetch("/districts.json").then(res => res.json()),
         fetch("/upazilas.json").then(res => res.json()),
       ]);
-      loadedProfile = profileRes.data || null;
-      loadedDistricts = districtsRes.find((item) => item.name === "districts")?.data || [];
-      loadedUpazilas = upazilasRes.find((item) => item.name === "upazilas")?.data || [];
+      const loadedProfile = profileRes.data || null;
+      const loadedDistricts = districtsRes.find((item) => item.name === "districts")?.data || [];
+      const loadedUpazilas = upazilasRes.find((item) => item.name === "upazilas")?.data || [];
       setProfile(loadedProfile);
       setDistricts(loadedDistricts);
       setUpazilas(loadedUpazilas);
@@ -60,7 +55,6 @@ const Profile = () => {
     fetchAll();
   }, [user]);
 
-  // Update filtered upazilas when district changes
   useEffect(() => {
     setFilteredUpazilas(upazilas.filter((u) => u.district_id === formState.district));
   }, [formState.district, upazilas]);
@@ -72,7 +66,7 @@ const Profile = () => {
     setFormState(prev => ({
       ...prev,
       [name]: value,
-      ...(name === "district" ? { upazila: "" } : {}), // reset upazila if district changes
+      ...(name === "district" ? { upazila: "" } : {}),
     }));
   };
 
@@ -92,11 +86,7 @@ const Profile = () => {
     Swal.fire("Success", "Profile updated!", "success");
   };
 
-  if (loading || !profile) return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white">
-      <div className="text-xl">Loading...</div>
-    </div>
-  );
+  if (loading || !profile) return <Loading />;
 
   // For select values
   const districtId = editMode
@@ -116,27 +106,20 @@ const Profile = () => {
             className="w-24 h-24 rounded-full border-4 border-[#BB2B29] dark:border-[#FFE8E8] shadow-lg object-cover"
           />
         </div>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Profile</h2>
+          {!editMode ? (
+            <button
+              type="button"
+              className="text-[#BB2B29] font-bold px-4 py-4 rounded-full hover:bg-[#eeb5b5] transition"
+              onClick={handleEdit}
+              title="Edit"
+            >
+              <RiEdit2Fill className="text-2xl"/>
+            </button>
+          ) : null}
+        </div>
         <form onSubmit={handleSave} className="space-y-5">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Profile</h2>
-            {!editMode ? (
-              <button
-                type="button"
-                className="text-[#BB2B29] font-bold px-4 py-4 rounded-full hover:bg-[#eeb5b5] transition"
-                onClick={handleEdit}
-                title="Edit"
-              >
-                <RiEdit2Fill className="text-2xl"/>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="btn bg-[#E53935] text-white font-bold px-6 py-2 rounded-lg hover:bg-[#bb2b29] transition"
-              >
-                Save
-              </button>
-            )}
-          </div>
           <input
             name="name"
             value={editMode ? formState.name : profile.name}
@@ -193,6 +176,14 @@ const Profile = () => {
             <option value="">Select Blood Group</option>
             {bloodGroups.map(bg => <option key={bg} value={bg}>{bg}</option>)}
           </select>
+          {editMode && (
+            <button
+              type="submit"
+              className="btn bg-[#E53935] text-white font-bold px-6 py-2 rounded-lg hover:bg-[#bb2b29] transition"
+            >
+              Save
+            </button>
+          )}
         </form>
       </div>
     </div>

@@ -20,7 +20,7 @@ const VolunteerAllBloodDonationRequests = () => {
         setTotal(res.data.total);
       });
   }, [status, page]);
-
+console.log(requests);
   const totalPages = Math.ceil(total / limit);
 
   const handleStatusChange = async (id, newStatus) => {
@@ -97,7 +97,7 @@ const VolunteerAllBloodDonationRequests = () => {
                   <td className="py-3 px-2 md:px-4 text-white dark:text-[#FFE8E8]">
                     {req.donorInfo ? (
                       <div>
-                        {req.donorInfo.name} <br /> {req.donorInfo.email}
+                        {req.donorInfo[0].name} 
                       </div>
                     ) : (
                       "-"
