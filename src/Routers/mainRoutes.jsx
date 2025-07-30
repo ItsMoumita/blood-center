@@ -24,6 +24,7 @@ import FundingPage from "../pages/DashboardPages/DonorPages/FundingPage";
 import DonorSearch from "../pages/HomePages/DonorSearch";
 import PendingDonationRequests from "../pages/HomePages/PendingDonationRequest";
 import DonationRequestDetails from "../pages/HomePages/DonationRequestDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const mainRoutes = createBrowserRouter([
   {
@@ -45,13 +46,21 @@ const mainRoutes = createBrowserRouter([
       },
       {
         path: "/donation-request/:id",
-        element: <DonationRequestDetails />
+        Component: () => (
+          <PrivateRoute>
+              <DonationRequestDetails />
+          </PrivateRoute>
+        )
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    Component: () => (
+      <PrivateRoute>
+         <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       { index: true, element: <Dashboard /> },
       { path: "profile", element: <Profile /> },
