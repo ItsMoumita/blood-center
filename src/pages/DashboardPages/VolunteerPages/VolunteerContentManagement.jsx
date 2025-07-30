@@ -2,44 +2,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const ContentManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [blogs, setBlogs] = useState([]);
   const [status, setStatus] = useState("all");
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure.get(`/blogs?status=${status}`).then(res => setBlogs(res.data));
   }, [status, axiosSecure]);
 
-//   const handleStatusChange = async (id, newStatus) => {
-//     await axiosSecure.patch(`/blogs/${id}/status`, { status: newStatus });
-//     setBlogs((prev) =>
-//       prev.map((blog) =>
-//         blog._id === id ? { ...blog, status: newStatus } : blog
-//       )
-//     );
-//     Swal.fire("Success", `Blog status updated to ${newStatus}`, "success");
-//   };
 
-//   const handleDelete = (id) => {
-//     Swal.fire({
-//       title: "Are you sure?",
-//       text: "You won't be able to revert this!",
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonColor: "#BB2B29",
-//       cancelButtonColor: "#d33",
-//       confirmButtonText: "Yes, delete it!",
-//     }).then(async (result) => {
-//       if (result.isConfirmed) {
-//         await axiosSecure.delete(`/blogs/${id}`);
-//         setBlogs((prev) => prev.filter((blog) => blog._id !== id));
-//         Swal.fire("Deleted!", "Blog has been deleted.", "success");
-//       }
-//     });
-//   };
-
+if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
       <div className="max-w-7xl p-8 md:p-12 mx-auto">

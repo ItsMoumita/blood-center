@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEllipsisV, FaUserShield, FaUserCheck, FaUserTimes, FaUserEdit } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const statusOptions = ["all", "active", "blocked"];
 
@@ -11,15 +12,19 @@ const AllUsers = () => {
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const[loading, setLoading] = useState(false);
   const limit = 10;
 
   useEffect(() => {
+    setLoading(true)
     axiosSecure
       .get(`/users?status=${status}&page=${page}&limit=${limit}`)
       .then((res) => {
         setUsers(res.data.users);
         setTotal(res.data.total);
       });
+    setLoading(false);
+
   }, [status, page]);
 
   const totalPages = Math.ceil(total / limit);
@@ -39,6 +44,7 @@ const AllUsers = () => {
       });
   };
 
+  if(loading) return <Loading></Loading>
   return (
     <div className="p-2 sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
       <div className="w-full max-w-6xl mx-auto mt-4">
@@ -57,7 +63,7 @@ const AllUsers = () => {
         <div className="w-full">
           <table className="w-full ">
             <thead >
-              <tr className="bg-[#FFE8E8] ">
+              <tr className="bg-[#FFE8E8] dark:bg-[#530404]">
                 <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">User</th>
                 <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Email</th>
                 <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Role</th>

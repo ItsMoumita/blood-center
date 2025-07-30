@@ -3,6 +3,7 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -16,6 +17,7 @@ const CreateDonationRequest = () => {
   const [filteredUpazilas, setFilteredUpazilas] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [status, setStatus] = useState("active");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch("/districts.json")
@@ -32,7 +34,9 @@ const CreateDonationRequest = () => {
         setUpazilas(upazilasData);
       });
 
+       setLoading(true)
     axiosSecure.get("/get-user-role").then(res => setStatus(res.data.status));
+    setLoading(false);
   }, []);
 
   const handleDistrictChange = (e) => {
@@ -66,6 +70,7 @@ const CreateDonationRequest = () => {
     navigate("/dashboard/my-donation-requests");
   };
 
+  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b p-4 from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
       <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">

@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import Swal from "sweetalert2";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -71,12 +72,15 @@ const FundingPage = () => {
   const [fundings, setFundings] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+    const [loading, setLoading] = useState(false);
   const limit = 10;
 
   const fetchFundings = () => {
+    setLoading(true);
     axiosSecure.get(`/fundings?page=${page}&limit=${limit}`).then(res => {
       setFundings(res.data.fundings);
       setTotal(res.data.total);
+      setLoading(false);
     });
   };
 
@@ -85,6 +89,7 @@ const FundingPage = () => {
     // eslint-disable-next-line
   }, [page]);
 
+  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
       <div className="max-w-4xl mx-auto mt-8">

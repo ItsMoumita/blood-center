@@ -3,12 +3,13 @@ import Lottie from "lottie-react";
 
 import { Link } from "react-router";
 import { Typewriter } from "react-simple-typewriter";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Banner = () => {
   const leftRef = useRef();
-
+  const {user} = useContext(AuthContext);
   useEffect(() => {
     gsap.from(leftRef.current, {
       opacity: 50,
@@ -49,12 +50,18 @@ const Banner = () => {
           All types of blood are needed to help patients.
         </p>
         <div className="flex gap-4">
-          <Link
+          {
+            !user? (<>
+               <Link
             to="/registration"
             className="px-6 py-3 rounded font-bold bg-[#BB2B29] text-white hover:bg-[#530404] transition"
           >
             Join as a Donor
           </Link>
+            </>): (<>
+            
+            </>)
+          }
           <Link
             to="/search"
             className="px-6 py-3 rounded font-bold border-2 border-[#BB2B29] text-[#BB2B29] dark:border-[#FFE8E8] dark:text-[#FFE8E8] hover:bg-[#BB2B29] hover:text-white transition"

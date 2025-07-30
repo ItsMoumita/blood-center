@@ -73,7 +73,7 @@ const AllBloodDonationRequests = () => {
         <div className="w-full">
           <table className="w-full">
             <thead>
-              <tr className="bg-[#FFE8E8]">
+              <tr className="bg-[#FFE8E8] dark:bg-[#530404]">
                 <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Recipient</th>
                 <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Location</th>
                 <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Date</th>

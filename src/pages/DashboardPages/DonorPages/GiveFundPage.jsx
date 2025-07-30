@@ -36,6 +36,8 @@ const FundingForm = ({ onSuccess }) => {
     }
   };
 
+
+  if(loading) return <loading></loading>
   return (
     <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-2xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
       <h3 className="text-lg font-bold mb-4 text-[#E53935] text-center">Give Fund</h3>

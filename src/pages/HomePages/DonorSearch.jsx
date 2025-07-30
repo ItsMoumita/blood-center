@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../../components/ExtraComponents/Loading";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -10,6 +11,7 @@ const DonorSearch = () => {
   const [form, setForm] = useState({ blood_group: "", district: "", upazila: "" });
   const [requests, setRequests] = useState([]);
   const [searched, setSearched] = useState(false);
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch("/districts.json")
@@ -45,11 +47,14 @@ const DonorSearch = () => {
     if (form.blood_group) params.append("blood_group", form.blood_group);
     if (form.district) params.append("district", districts.find(d => d.id === form.district)?.name || "");
     if (form.upazila) params.append("upazila", upazilas.find(u => u.id === form.upazila)?.name || "");
+    setLoading(true);
     const { data } = await axios.get(`https://blood-donation-server-umber-iota.vercel.app/search-donation-requests?${params.toString()}`);
+    setLoading(false);
     setRequests(data);
     setSearched(true);
   };
 
+  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
       <div className="max-w-3xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8 mt-8">

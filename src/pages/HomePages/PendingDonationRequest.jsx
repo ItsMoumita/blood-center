@@ -4,15 +4,20 @@ import axios from "axios";
 import { FaRegEye } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Loading from "../../components/ExtraComponents/Loading";
 
 const PendingDonationRequests = () => {
   const [requests, setRequests] = useState([]);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/search-donation-requests`)
+    setLoading(true);
+    axios.get(`https://blood-donation-server-umber-iota.vercel.app/search-donation-requests`)
       .then(res => setRequests(res.data));
+
+      setLoading(false);
   }, []);
 
   // Redirect to login if not logged in
@@ -20,6 +25,8 @@ const PendingDonationRequests = () => {
     if (!user) navigate("/login");
   }, [user, navigate]);
 
+
+  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
       <div className="max-w-4xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8 mt-8">

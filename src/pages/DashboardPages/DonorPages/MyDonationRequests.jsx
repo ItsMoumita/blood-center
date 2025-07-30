@@ -6,6 +6,7 @@ import { FaRegEye } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const statusOptions = ["all", "pending", "inprogress", "done", "canceled"];
 
@@ -16,16 +17,20 @@ const MyDonationRequests = () => {
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+    const [loading, setLoading] = useState(false);
   const limit = 10;
 
   useEffect(() => {
     if (user?.email) {
+      setLoading(true);
       axiosSecure
         .get(`/donation-requests?email=${user.email}&status=${status}&page=${page}&limit=${limit}`)
         .then((res) => {
           setRequests(res.data.requests);
           setTotal(res.data.total);
         });
+
+        setLoading(false);
     }
   }, [user, status, page]);
 
@@ -49,6 +54,8 @@ const MyDonationRequests = () => {
   });
 };
 
+
+if(loading) return <Loading></Loading>
   return (
     <div className="p-2 sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
       <div className="w-full max-w-6xl mx-auto mt-4">
@@ -67,7 +74,7 @@ const MyDonationRequests = () => {
         <div className="w-full">
           <table className="w-full">
             <thead>
-              <tr className="bg-[#FFE8E8]">
+              <tr className="bg-[#FFE8E8] dark:bg-[#530404]">
                 <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Recipient</th>
                 <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Location</th>
                 <th className="py-3 px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Date</th>

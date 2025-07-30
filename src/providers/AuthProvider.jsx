@@ -13,6 +13,7 @@ import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/axiosPublic";
 import axios from "axios";
+import Loading from "../components/ExtraComponents/Loading";
 
 export const AuthContext = createContext();
 
@@ -72,6 +73,8 @@ const AuthProvider = ({ children }) => {
   });
   return () => unsubscribe();
 }, []);
+
+if(loading) return <Loading></Loading>
 
 //console.log(user, role);
   const authInfo = {

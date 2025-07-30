@@ -5,20 +5,25 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaRegEye } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 import { MdDeleteForever } from "react-icons/md";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const DonorDashboard = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [requests, setRequests] = useState([]);
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user?.email) {
+      setLoading(true);
       axiosSecure
         .get(`/donation-requests/recent?email=${user.email}`)
         .then((res) => setRequests(res.data));
     }
+    setLoading(false);
   }, [user, axiosSecure]);
 
+  if(loading) return <Loading></Loading>
   return (
     <div className="p-2 sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
       <div className="w-full max-w-6xl mx-auto mt-4">

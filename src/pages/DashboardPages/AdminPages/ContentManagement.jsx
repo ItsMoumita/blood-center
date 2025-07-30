@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const ContentManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [blogs, setBlogs] = useState([]);
   const [status, setStatus] = useState("all");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure.get(`/blogs?status=${status}`).then(res => setBlogs(res.data));
+    setLoading(false);
   }, [status, axiosSecure]);
 
   const handleStatusChange = async (id, newStatus) => {
@@ -40,6 +44,7 @@ const ContentManagement = () => {
     });
   };
 
+  if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
       <div className="max-w-7xl p-8 md:p-12 mx-auto">

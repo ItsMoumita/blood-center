@@ -16,8 +16,10 @@ const EditDonationRequest = () => {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const navigate = useNavigate();
   const { role } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure.get(`/donation-requests/${id}`).then(res => {
       setRequest(res.data);
       // Find district id by name for select value
@@ -25,7 +27,9 @@ const EditDonationRequest = () => {
         ? districts.find(d => d.name === res.data.recipientDistrict)
         : null;
       setSelectedDistrict(districtObj ? districtObj.id : "");
-    });
+      setLoading(false);
+    } );
+
     fetch("/districts.json")
       .then((res) => res.json())
       .then((data) => {
@@ -84,6 +88,8 @@ const EditDonationRequest = () => {
   const upazilaObj = upazilas.find(u => u.name === request.recipientUpazila);
   const upazilaId = upazilaObj ? upazilaObj.id : "";
 
+
+  if(loading) return <loading></loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
       <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">

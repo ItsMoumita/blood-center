@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loading from "../components/ExtraComponents/Loading";
 
 export default function AllUsers() {
   // const [users, setUsers] = useState([]);
@@ -40,7 +41,7 @@ export default function AllUsers() {
   //   axiosSecure.get("/get-users").then(({ data }) => setUsers(data));
   // }, []);
 if(isLoading){
-  return <h1 className="text-5xl text-red-600">Loading.............</h1>
+  <Loading></Loading>
 }
   return (
     <div>

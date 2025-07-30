@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const ViewDonationRequest = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [request, setRequest] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     axiosSecure.get(`/donation-requests/${id}`).then(res => setRequest(res.data));
   }, [id, axiosSecure]);
 
-  if (!request) return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white">
-      <div className="text-xl">Loading...</div>
-    </div>
-  );
+  if (!request) return  <Loading></Loading>;
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white py-8">

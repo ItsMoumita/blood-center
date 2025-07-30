@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaUsers, FaHandHoldingUsd, FaTint } from "react-icons/fa";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const statCards = [
   {
@@ -29,11 +30,16 @@ const VolunteerDashboard = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [stats, setStats] = useState({});
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure.get("/admin-dashboard-stats").then(res => setStats(res.data));
+    setLoading(false);
   }, []);
 
+
+  if(loading) return <Loading></Loading>
   return (
     <div className="p-4 w-full min-h-screen bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000]">
       <h2 className=" mx-auto text-2xl font-bold mb-8 text-[#FFE8E8]">Welcome, {user?.displayName || "Volunteer"}!</h2>

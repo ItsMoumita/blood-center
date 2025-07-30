@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/ExtraComponents/Loading";
 
 const Blog = () => {
   // You can use axiosPublic if you want this page to be public
   const axios = useAxiosSecure();
   const [blogs, setBlogs] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     axios.get("/blogs").then(res => setBlogs(res.data));
+    setLoading(false)
   }, []);
+
+  if(loading) return <Loading></Loading>
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
