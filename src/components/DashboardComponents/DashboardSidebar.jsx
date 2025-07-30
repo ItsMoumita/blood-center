@@ -48,7 +48,8 @@ const DashboardSidebar = () => {
     <>
       {/* Mobile menu button */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 bg-[#BB2B29] text-white p-2 rounded-full shadow"
+        className={`lg:hidden fixed top-4 left-4 z-50 bg-[#BB2B29] text-white p-2 rounded-full shadow
+           ${open ? "hidden" : ""}`}
         onClick={() => setOpen(true)}
         aria-label="Open dashboard menu"
       >
@@ -64,7 +65,7 @@ const DashboardSidebar = () => {
           lg:translate-x-0 lg:static lg:w-64
         `}
       >
-        <ThemeToggle></ThemeToggle>
+       
         {/* Close button for mobile */}
         <div className="flex items-center justify-between p-4 lg:hidden">
           <span className="font-bold text-lg text-[#BB2B29] dark:text-[#FFE8E8]">Dashboard</span>
@@ -136,7 +137,7 @@ const DashboardSidebar = () => {
       {/* Overlay for mobile when sidebar is open */}
       {open && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-lg bg-opacity-30 z-30 lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}

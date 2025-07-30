@@ -47,9 +47,9 @@ const ContentManagement = () => {
   if(loading) return <Loading></Loading>
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
-      <div className="max-w-7xl p-8 md:p-12 mx-auto">
+      <div className="max-w-7xl p-8 mt-20 md:mt-12 md:p-12 mx-auto">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#FFE8E8]">Content Management</h2>
+          <h2 className="text-2xl md:text-4xl  md:text-left font-bold text-[#FFE8E8]">Content Management</h2>
           <Link to="/dashboard/content-management/add-blog">
             <button className="btn bg-[#BB2B29] text-white font-bold uppercase rounded-lg px-6 py-2 hover:bg-[#E53935] transition">
               Add Blog

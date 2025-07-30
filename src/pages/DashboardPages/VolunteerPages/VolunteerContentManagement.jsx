@@ -13,6 +13,7 @@ const ContentManagement = () => {
   useEffect(() => {
     setLoading(true);
     axiosSecure.get(`/blogs?status=${status}`).then(res => setBlogs(res.data));
+    setLoading(false);
   }, [status, axiosSecure]);
 
 

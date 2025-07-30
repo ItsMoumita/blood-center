@@ -72,9 +72,9 @@ const CreateDonationRequest = () => {
 
   if(loading) return <Loading></Loading>
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b p-4 from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
-      <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold mb-8 text-center text-[#BB2B29] dark:text-[#FFE8E8]">Create Donation Request</h2>
+    <div className="min-h-screen w-full bg-gradient-to-b p-4 from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center">
+      <div className="w-full mt-20 md:mt-12 max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl md:text-4xl text-center md:text-left font-bold mb-8  text-[#BB2B29] dark:text-[#FFE8E8]">Create Donation Request</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <input
             type="text"

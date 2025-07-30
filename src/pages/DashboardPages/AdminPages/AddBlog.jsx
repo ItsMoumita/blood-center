@@ -39,9 +39,9 @@ const AddBlog = () => {
  
   if(loading) return <Loading></Loading>
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-2xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold mb-8 text-center text-[#BB2B29] dark:text-[#FFE8E8]">Add Blog</h2>
+        <h2 className="text-2xl md:text-4xl text-center md:text-left font-bold mb-8  text-[#BB2B29] dark:text-[#FFE8E8]">Add Blog</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <input
             className="w-full bg-[#f5f5f5] dark:bg-[#1a2233] rounded-lg py-4 px-4 text-[#530404] dark:text-[#FFE8E8] placeholder-gray-400 focus:outline-none"
