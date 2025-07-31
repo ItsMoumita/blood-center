@@ -59,7 +59,7 @@ const DashboardSidebar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 min-h-screen h-full w-64 bg-[#FFE8E8] dark:bg-[#530404] shadow-lg z-40
+          fixed top-0 left-0 min-h-100vh w-64 bg-[#FFE8E8] dark:bg-[#530404] shadow-lg z-40
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:w-64
