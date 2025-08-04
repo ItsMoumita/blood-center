@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../providers/AuthProvider";
+import Loading from "../../../components/ExtraComponents/Loading";
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
@@ -74,11 +75,7 @@ const EditDonationRequest = () => {
       navigate("/dashboard/all-blood-donation-request");
   };
 
-  if (!request) return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white">
-      <div className="text-xl">Loading...</div>
-    </div>
-  );
+  if (!request) return <Loading></Loading>;
 
   // Find district id by name for select value
   const districtObj = districts.find(d => d.name === request.recipientDistrict);

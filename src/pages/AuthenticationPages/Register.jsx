@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router";
 import Lottie from "lottie-react";
-import happy from "../../assets/happy.json";
+// import happy from "../../assets/happy.json";
+import bloodPressure from "../../assets/bloodPressure.json"
 import Title from "../../components/ExtraComponents/Title";
 import { BiUser, BiImageAdd, BiEnvelope, BiKey,  } from "react-icons/bi";
 import { MdOutlineBloodtype } from "react-icons/md";
@@ -236,7 +237,7 @@ const Register = () => {
             </div>
             {/* Animation: 1/3 on md+, hidden on mobile */}
             <div className="lottie w-full md:w-1/3 lg:w-1/2 mx-0 md:mx-2 hidden md:flex items-center justify-center">
-              <Lottie animationData={happy} loop={true} />
+              <Lottie animationData={bloodPressure} loop={true} />
             </div>
           </div>
         </div>
