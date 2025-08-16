@@ -35,9 +35,9 @@ const ThemeToggle = () => {
         className="w-10 h-10 size-16 rounded-full flex items-center justify-center  hover:scale-110 transition-all duration-300"
       >
         {theme === "dark" ? (
-          <MdLightMode className="text-[#BB2B29] hover:text-[#530404] text-3xl" />
+          <MdLightMode className="text-[#BB2B29] dark:text-[#F5F5F5] hover:text-[#530404] dark:hover:text-[#BB2B29] text-3xl" />
         ) : (
-          <FaMoon className="text-[#BB2B29] hover:text-[#530404] text-3xl" />
+          <FaMoon className="text-[#BB2B29] dark:text-[#F5F5F5] hover:text-[#530404] dark:hover:text-[#BB2B29] text-3xl" />
         )}
       </button>
       <Tooltip 
