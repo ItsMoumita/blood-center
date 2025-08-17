@@ -20,7 +20,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFF] dark:from-[#14274E] dark:via-black/30 dark:to-gray-500 transition-colors duration-300 overflow-hidden backdrop-blur-sm bg-opacity-80">
+    <section className="relative min-h-[60vh] md:min-h-[70vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFE8E8]/20 dark:from-[#14274E] dark:via-black/30 dark:to-gray-500 transition-colors duration-300 overflow-hidden backdrop-blur-sm bg-opacity-80">
       {/* Left Content */}
       <div
         ref={leftRef}

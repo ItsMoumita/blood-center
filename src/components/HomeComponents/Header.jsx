@@ -13,6 +13,7 @@ const menu = [
   { name: "Home", path: "/" },
   { name: "Donation Requests", path: "/pending-donation-requests" },
   { name: "Blog", path: "/blog" },
+  { name: "Profile", path: "/profile" },
 ];
 
 const Header = () => {

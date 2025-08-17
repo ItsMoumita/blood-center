@@ -21,6 +21,7 @@
     "gsap": "^3.13.0",
     "jodit-react": "^5.2.19",
     "lottie-react": "^2.4.1",
+    "lucide-react": "^0.539.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",

@@ -15,32 +15,32 @@ const LiveCount = () => {
     {
       label: "Active Donors",
       value: counts?.totalDonors || 0,
-      icon: <FaUserFriends className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
+      icon: <FaUserFriends className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
     {
       label: "Active Volunteers",
       value: counts?.totalVolunteers || 0,
-      icon: <FaUserTie className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
+      icon: <FaUserTie className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
     {
       label: "Total Funding",
       value: counts?.totalFunding || 0,
-      icon: <FaHandHoldingUsd className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
+      icon: <FaHandHoldingUsd className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
       prefix: "৳",
     },
     {
       label: "Donation Requests",
       value: counts?.totalRequests || 0,
-      icon: <FaTint className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
+      icon: <FaTint className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
     {
       label: "Successful Donations",
       value: counts?.totalSuccessfulDonations || 0,
-      icon: <FaCheckCircle className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
+      icon: <FaCheckCircle className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
   ];
@@ -57,7 +57,7 @@ const LiveCount = () => {
           >
             {card.icon}
             <div className="text-4xl font-bold mt-2 text-[#BB2B29] dark:text-[#F5F5F5]">
-              <CountUp end={card.value} duration={1.2} separator="," prefix={card.prefix || ""} />
+              <CountUp end={card.value} duration={5} separator="," prefix={card.prefix || ""} />
             </div>
             <div className="text-lg font-semibold mt-1 text-[#530404] dark:text-[#F5F5F5]/80">{card.label}</div>
           </div>

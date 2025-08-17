@@ -58,6 +58,8 @@ const PendingDonationRequests = () => {
     };
   }, []);
 
+
+
   // Redirect to login if not logged in
   useEffect(() => {
     if (!user) navigate("/login");
@@ -79,10 +81,10 @@ const PendingDonationRequests = () => {
   const paginated = pendingRequests.slice(start, start + itemsPerPage);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#87CEEB]/60 via-white/50 to-white dark:from-[#14274E]/85 dark:via-slate-900/60 dark:to-slate-700 transition-colors duration-300 p-4 py-10">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFE8E8]/20 dark:from-[#0F172A] dark:via-[#0d1424] dark:to-[#000000]  transition-colors duration-300 p-4 py-10">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-2xl md:text-3xl font-extrabold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#BB2B29] to-[#530404] dark:from-[#FFE8E8] dark:to-[#BB2B29]"
+          className="text-2xl md:text-4xl font-extrabold text-center mb-6  text-[#BB2B29] dark:text-[#ffffff]"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
@@ -104,7 +106,7 @@ const PendingDonationRequests = () => {
 
           {/* Real cards */}
           {!loading && pendingRequests.length === 0 && (
-            <div className="col-span-full text-center text-[#BB2B29] font-semibold">
+            <div className="col-span-full text-center text-[#BB2B29] dark:text-[#ffffff] font-semibold">
               No pending requests found.
             </div>
           )}
@@ -121,24 +123,24 @@ const PendingDonationRequests = () => {
                   exit="exit"
                   whileHover={{ y: -3, boxShadow: "0 10px 24px rgba(0,0,0,0.08)" }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-[#FFE8E8] dark:bg-[#1a2233] rounded-xl shadow p-4 flex flex-col gap-2 ring-1 ring-black/5 dark:ring-white/10"
+                  className="bg-[#FFE8E8]/20 dark:bg-[#1a2233] rounded-xl shadow p-4 flex flex-col gap-2 ring-1 ring-black/5 dark:ring-white/10"
                 >
-                  <div className="font-bold text-[#530404] dark:text-[#FFE8E8] text-lg">
+                  <div className="font-bold text-[#530404] dark:text-[#FFE8E8] text-xl">
                     {req.recipientName}
                   </div>
-                  <div className="text-[#530404] dark:text-[#FFE8E8] text-sm">
+                  <div className="text-[#530404] dark:text-[#FFE8E8] text-lg">
                     {req.recipientDistrict}, {req.recipientUpazila}
                   </div>
-                  <div className="text-[#BB2B29] dark:text-[#ECAAA0] text-sm">{req.bloodGroup}</div>
-                  <div className="text-[#530404] dark:text-[#FFE8E8] text-sm">
+                  <div className="text-[#BB2B29] font-bold dark:text-[#E53935] text-lg">{req.bloodGroup}</div>
+                  <div className="text-[#530404] dark:text-[#FFE8E8] text-lg">
                     Date: {req.donationDate}
                   </div>
-                  <div className="text-[#530404] dark:text-[#FFE8E8] text-sm">
+                  <div className="text-[#530404] dark:text-[#FFE8E8] text-lg">
                     Time: {req.donationTime}
                   </div>
                   <motion.button
                     whileTap={{ scale: 0.97 }}
-                    className="mt-2 flex items-center gap-2 justify-center bg-[#E53935] text-white font-bold rounded-lg py-2 px-4 uppercase tracking-wider hover:bg-[#bb2b29] transition"
+                    className="mt-2 flex items-center gap-2 justify-center bg-[#BB2B29] text-white font-bold rounded-lg py-2 px-4 uppercase tracking-wider hover:bg-[#E53935] transition"
                     onClick={() => navigate(`/donation-request/${req._id}`)}
                   >
                     <FaRegEye /> View

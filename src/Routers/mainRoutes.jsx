@@ -44,6 +44,9 @@ const mainRoutes = createBrowserRouter([
         path: "/pending-donation-requests",
         element: <PendingDonationRequests />
       },
+      {  path: "profile", 
+        element: <Profile /> 
+      },
       {
         path: "/donation-request/:id",
         Component: () => (
