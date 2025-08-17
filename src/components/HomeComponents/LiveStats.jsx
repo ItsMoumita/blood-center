@@ -46,7 +46,7 @@ const LiveCount = () => {
   ];
 
   return (
-    <div className="bg-[#FFE8E8]/20 dark:bg-[#0F172A] border-t-2 border-[#BB2B29]/20 dark:border-[#FFE8E8]/20 py-16">
+    <div className="bg-[#FFE8E8]/20 dark:bg-[#0F172A] border-t-2 border-b-2 border-[#BB2B29]/20 dark:border-[#FFE8E8]/20 py-16">
       <div className="max-w-11/12 mx-auto py-8 px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {cards.map((card, idx) => (
