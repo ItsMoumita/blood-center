@@ -16,37 +16,37 @@ const LiveCount = () => {
       label: "Active Donors",
       value: counts?.totalDonors || 0,
       icon: <FaUserFriends className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
-      color: "bg-[#F5F5F5] dark:bg-[#273a57]",
+      color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
     {
       label: "Active Volunteers",
       value: counts?.totalVolunteers || 0,
       icon: <FaUserTie className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
-      color: "bg-[#F5F5F5] dark:bg-[#273a57]",
+      color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
     {
       label: "Total Funding",
       value: counts?.totalFunding || 0,
       icon: <FaHandHoldingUsd className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
-      color: "bg-[#F5F5F5] dark:bg-[#273a57]",
+      color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
       prefix: "৳",
     },
     {
       label: "Donation Requests",
       value: counts?.totalRequests || 0,
       icon: <FaTint className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
-      color: "bg-[#F5F5F5] dark:bg-[#273a57]",
+      color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
     {
       label: "Successful Donations",
       value: counts?.totalSuccessfulDonations || 0,
       icon: <FaCheckCircle className="text-4xl text-[#BB2B29] dark:text-[#F5F5F5]" />,
-      color: "bg-[#F5F5F5] dark:bg-[#273a57]",
+      color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
   ];
 
   return (
-    <div className="bg-[#F5F5F5] dark:bg-[#0F172A]">
+    <div className="bg-[#FFE8E8]/20 dark:bg-[#0F172A] border-t-2 border-[#BB2B29]/20 dark:border-[#FFE8E8]/20 py-16">
       <div className="max-w-11/12 mx-auto py-8 px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {cards.map((card, idx) => (

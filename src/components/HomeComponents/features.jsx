@@ -43,7 +43,7 @@ const Features = () => {
 
   return (
     <section className="bg-[#FFE8E8]/20 dark:bg-[#0F172A] py-16">
-      <div className="container mx-auto px-4">
+      <div className="max-w-11/12 container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-[#BB2B29] dark:text-[#FFE8E8]/80 mb-4">
             Why Choose Our Platform?
