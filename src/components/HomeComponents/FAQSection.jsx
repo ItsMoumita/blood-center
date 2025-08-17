@@ -91,7 +91,7 @@ export default function FAQSection() {
       viewport={{ once: true }}
       className="flex items-center justify-center py-16 bg-[#FFE8E8]/20 dark:bg-[#0F172A]"
     >
-      <div className="w-full max-w-2xl mx-auto">
+      <div className="w-full max-w-5xl mx-auto">
         <div className="p-4">
           <h1 className="text-3xl md:text-4xl font-extrabold text-center text-[#BB2B29] dark:text-[#FFE8E8] mb-2">
             Frequently Asked Questions

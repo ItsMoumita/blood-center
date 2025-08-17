@@ -64,7 +64,7 @@ const HomeDonationRequestForm = () => {
     <section className="bg-[#FFE8E8]/20 dark:bg-[#0F172A] py-16">
         <h2 className="text-2xl md:text-4xl text-center font-bold mb-8 text-[#BB2B29] dark:text-[#FFE8E8]">Create Donation Request</h2>
 
-        <div className="max-w-10/12 mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8 my-8">
+        <div className="max-w-7xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8 my-8">
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Row 1: Name, Email, Recipient Name */}
         <div className="flex flex-col lg:flex-row gap-4">
