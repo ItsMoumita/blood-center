@@ -37,15 +37,15 @@ console.log(request)
   );
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
-      <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold mb-8 text-center text-[#BB2B29] dark:text-[#FFE8E8]">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFF] dark:from-[#14274E] dark:via-black/30 dark:to-gray-500 transition-colors duration-300 overflow-hidden backdrop-blur-sm bg-opacity-80 flex flex-col items-center justify-center py-8">
+      <h2 className="text-2xl md:text-4xl font-bold mb-8 text-center text-[#BB2B29] dark:text-[#F5F5F5]">
           Donation Request Details
         </h2>
-        <div className="space-y-4 text-base">
+      <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">  
+        <div className="space-y-4 text-lg">
           <div><span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Recipient Name:</span> <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.recipientName}</span></div>
           <div><span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Location:</span> <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.recipientDistrict}, {request.recipientUpazila}</span></div>
-          <div><span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Blood Group:</span> <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.bloodGroup}</span></div>
+          <div><span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Blood Group:</span> <span className="ml-2 text-[#530404] dark:text-[#BB2B29] font-bold text-xl">{request.bloodGroup}</span></div>
           <div><span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Date:</span> <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.donationDate}</span></div>
           <div><span className="font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Time:</span> <span className="ml-2 text-[#530404] dark:text-[#FFE8E8]">{request.donationTime}</span></div>
           {/* Add more fields as needed */}
@@ -64,7 +64,7 @@ console.log(request)
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
             <div className="bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8 w-full max-w-md">
-              <h3 className="text-lg font-bold mb-4 text-[#BB2B29] dark:text-[#FFE8E8] text-center">Confirm Donation</h3>
+              <h3 className="text-2xl font-bold mb-4 text-[#BB2B29] dark:text-[#FFE8E8] text-center">Confirm Donation</h3>
               <form onSubmit={handleDonate} className="space-y-4">
                 <input
                   type="text"
@@ -82,14 +82,14 @@ console.log(request)
                 />
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-lg bg-[#E53935] text-white font-bold uppercase tracking-wider text-lg hover:bg-[#bb2b29] transition"
+                  className="w-full py-4 rounded-lg bg-[#bb2b29] text-white font-bold uppercase tracking-wider text-lg hover:bg-[#E53935] transition"
                 >
                   Confirm
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="w-full py-4 rounded-lg bg-[#BB2B29] text-white font-bold uppercase tracking-wider text-lg hover:bg-[#ECAAA0] hover:text-[#530404] transition mt-2"
+                  className="w-full py-4 rounded-lg bg-[#bb2b29] text-white font-bold uppercase tracking-wider text-lg hover:bg-[#E53935] transition mt-2"
                 >
                   Cancel
                 </button>

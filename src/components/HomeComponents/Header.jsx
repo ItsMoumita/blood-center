@@ -133,26 +133,56 @@ const Header = () => {
           <ThemeToggle />
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button (animated icons) */}
         <div className="lg:hidden flex items-center gap-2">
-          {!isMenuOpen ? (
+          <button
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="relative w-10 h-10 grid place-items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#BB2B29]/40 rounded-md"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {/* Open icon */}
             <RiMenuAddLine
-              onClick={() => setIsMenuOpen(true)}
-              className="text-2xl text-[#BB2B29] ml-2 cursor-pointer"
-              aria-label="Open menu"
+              className={`absolute text-2xl text-[#BB2B29] transition-all duration-300 ease-out ${
+                isMenuOpen ? "opacity-0 scale-90 rotate-90" : "opacity-100 scale-100 rotate-0"
+              }`}
             />
-          ) : (
+            {/* Close icon */}
             <CgMenuMotion
-              onClick={() => setIsMenuOpen(false)}
-              className="text-2xl text-[#BB2B29] ml-2 cursor-pointer"
-              aria-label="Close menu"
+              className={`absolute text-2xl text-[#BB2B29] transition-all duration-300 ease-out ${
+                isMenuOpen ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-90 -rotate-90"
+              }`}
             />
-          )}
+          </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <ul className="flex flex-col absolute top-full left-0 w-full bg-[#F5F5F5] dark:bg-[#182441] border-b-1 border-[#BB2B29] dark:border-[#530404] shadow-lg border-t z-50 p-4 lg:hidden text-lg">
+          <div className="flex flex-col absolute top-full left-0 w-full bg-[#F5F5F5] dark:bg-[#182441] border-b border-[#BB2B29] dark:border-[#530404] shadow-lg border-t z-50 p-4 lg:hidden text-lg">
+            {/* Top: Profile + Username + Theme Toggle */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {user && user?.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full border-2 border-[#BB2B29]"
+                  />
+                ) : (
+                  <FaUserCircle className="w-10 h-10 text-[#BB2B29]" />
+                )}
+                <div className="text-lg text-[#530404] dark:text-[#F5F5F5] font-semibold">
+                  {user?.displayName || "User"}
+                </div>
+              </div>
+              <div className="shrink-0">
+                <ThemeToggle />
+              </div>
+            </div>
+
+            {/* Divider */}
+            <hr className="my-3 border-[#ECAAA0]" />
+
             {/* Menu options */}
             <div className="flex flex-col gap-1 text-left">
               {menu.map((item) => (
@@ -190,57 +220,35 @@ const Header = () => {
               )}
             </div>
 
-            {/* Divider */}
-            <hr className="my-3 border-[#ECAAA0]" />
-
-            {/* User info or login/register */}
-            {user && user?.email ? (
-              <div className="flex flex-col items-start gap-2">
-                <div className="flex items-center gap-3">
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full border-2 border-[#BB2B29]"
-                    />
-                  ) : (
-                    <FaUserCircle className="w-10 h-10 text-[#BB2B29]" />
-                  )}
-                  <div className="text-lg text-[#530404] dark:text-[#F5F5F5]">
-                    {user.displayName || "User"}
-                  </div>
-                </div>
+            {/* Auth actions */}
+            <div className="mt-3">
+              {user && user?.email ? (
                 <button
                   onClick={logOuthandle}
                   className="mt-2 px-4 py-2 rounded bg-[#BB2B29] text-[#FFE8E8] font-semibold hover:bg-[#530404] transition text-lg"
                 >
                   Sign Out
                 </button>
-              </div>
-            ) : (
-              <div className="flex flex-col gap-2">
-                <NavLink
-                  to="/login"
-                  className="px-4 py-2 rounded text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Login
-                </NavLink>
-                <NavLink
-                  to="/registration"
-                  className="px-4 py-2 rounded text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Register
-                </NavLink>
-              </div>
-            )}
-
-            {/* Theme Toggle at the bottom */}
-            <div className="mt-4">
-              <ThemeToggle />
+              ) : (
+                <div className="flex flex-col gap-2">
+                  <NavLink
+                    to="/login"
+                    className="px-4 py-2 rounded text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Login
+                  </NavLink>
+                  <NavLink
+                    to="/registration"
+                    className="px-4 py-2 rounded text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Register
+                  </NavLink>
+                </div>
+              )}
             </div>
-          </ul>
+          </div>
         )}
       </div>
     </nav>
