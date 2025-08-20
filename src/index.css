@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
-
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -15,14 +14,15 @@
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap');
 
 
 
 
-.sora {
-  font-family: 'Sora', sans-serif;
+
+body{
+  font-family: "Playfair Display", serif !important;
 }
+
 
 
 

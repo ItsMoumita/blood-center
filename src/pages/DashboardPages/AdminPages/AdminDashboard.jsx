@@ -46,8 +46,8 @@ const AdminDashboard = () => {
 
 
   return (
-    <div className="w-full p-4 md:8 min-h-screen bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000]">
-      <h2 className="text-2xl md:text-4xl text-center  font-bold mb-8 text-[#FFE8E8]">Welcome, {user?.displayName || "Admin"}!</h2>
+    <div className="w-full p-4 md:8 min-h-screen bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFE8E8]/20 dark:from-[#0F172A] dark:via-[#0d1424] dark:to-[#000000]  transition-colors duration-300">
+      <h2 className="text-2xl md:text-4xl text-center  font-bold mt-8 mb-8 text-[#BB2B29] dark:text-[#FFE8E8]">Welcome, {user?.displayName || "Admin"}!</h2>
       <div className="w-full md:w-3/4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         {statCards.map(card => {
           // const change = parseFloat(stats[card.changeKey] || 0);

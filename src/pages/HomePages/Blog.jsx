@@ -16,9 +16,9 @@ const Blog = () => {
   if(loading) return <Loading></Loading>
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] p-4">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFE8E8]/20 dark:from-[#0F172A] dark:via-[#0d1424] dark:to-[#000000]  transition-colors duration-300 p-4">
       <div className="max-w-7xl p-8 md:p-12 mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#FFE8E8] mb-8 text-center">Our Blog</h2>
+        <h2 className="text-2xl md:text-4xl font-bold text-[#BB2B29] dark:text-[#FFE8E8] mb-8 text-center">Our Blog</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map(blog => (
             <div key={blog._id} className="bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-4 flex flex-col">

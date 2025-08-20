@@ -13,7 +13,6 @@ const menu = [
   { name: "Home", path: "/" },
   { name: "Donation Requests", path: "/pending-donation-requests" },
   { name: "Blog", path: "/blog" },
-  { name: "Profile", path: "/profile" },
 ];
 
 const Header = () => {
@@ -86,6 +85,20 @@ const Header = () => {
               Dashboard
             </NavLink>
           )}
+          {user && user?.email && (
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#FFE8E8] dark:bg-[#BB2B29] text-[#BB2B29] dark:text-[#FFE8E8] shadow-md"
+                    : "text-[#530404] dark:text-[#FFE8E8] hover:text-[#BB2B29]"
+                }`
+              }
+            >
+              Profile
+            </NavLink>
+          )}
 
           {/* Auth Section */}
           {user && user?.email ? (
@@ -118,13 +131,13 @@ const Header = () => {
             <>
               <NavLink
                 to="/login"
-                className="px-5 py-2 rounded-lg text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
+                className="px-5 py-2 font-bold rounded-lg text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
               >
                 Login
               </NavLink>
               <NavLink
                 to="/registration"
-                className="px-5 py-2 rounded-lg text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
+                className="px-5 py-2 font-bold rounded-lg text-lg text-[#530404] font-medium hover:bg-[#ECAAA0] hover:text-[#BB2B29] transition"
               >
                 Register
               </NavLink>
@@ -217,6 +230,21 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Dashboard
+                </NavLink>
+              )}
+              {user && user?.email && (
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    `block px-2 py-2 rounded font-medium ${
+                      isActive
+                        ? "bg-[#FFE8E8] dark:bg-[#BB2B29] text-[#BB2B29] dark:text-[#F5F5F5] shadow"
+                        : "text-[#530404] dark:text-[#F5F5F5] hover:text-[#BB2B29]"
+                    }`
+                  }
+                 
+                >
+                  Profile
                 </NavLink>
               )}
             </div>

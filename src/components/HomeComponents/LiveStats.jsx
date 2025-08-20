@@ -7,9 +7,10 @@ const LiveCount = () => {
   const [counts, setCounts] = useState(null);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/live-counts`)
+    axios.get(`https://blood-donation-server-umber-iota.vercel.app/live-counts`)
       .then(res => setCounts(res.data));
   }, []);
+  console.log(counts);
 
   const cards = [
     {
@@ -29,7 +30,7 @@ const LiveCount = () => {
       value: counts?.totalFunding || 0,
       icon: <FaHandHoldingUsd className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
-      prefix: "৳",
+      prefix: "$",
     },
     {
       label: "Donation Requests",
@@ -43,16 +44,18 @@ const LiveCount = () => {
       icon: <FaCheckCircle className="text-4xl text-[#BB2B29] " />,
       color: "bg-[#FFE8E8]/60 dark:bg-[#273a57]",
     },
+   
   ];
 
   return (
     <div className="bg-[#FFE8E8]/20 dark:bg-[#0F172A] border-t-2 border-b-2 border-[#BB2B29]/20 dark:border-[#FFE8E8]/20 py-16">
       <div className="max-w-11/12 mx-auto py-8 px-4">
+       <h1 className="text-3xl md:text-4xl text-center font-extrabold text-[#BB2B29] dark:text-[#FFE8E8] mb-2">Statistics</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {cards.map((card, idx) => (
           <div
             key={card.label}
-            className={`rounded-2xl shadow-lg p-6 shadow-sm shadow-gray-300 flex flex-col items-center ${card.color} transition-colors duration-300 animate-fadeIn`}
+            className={`rounded-2xl  p-6 shadow-sm shadow-gray-300 flex flex-col items-center ${card.color} transition-colors duration-300 animate-fadeIn`}
             style={{ animationDelay: `${idx * 80}ms` }}
           >
             {card.icon}

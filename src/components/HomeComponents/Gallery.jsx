@@ -120,7 +120,7 @@ const MasonryGrid = ({ items }) => (
 
 export default function Gallery() {
   return (
-    <section className="font-sans transition-colors py-16 bg-[#FFE8E8]/20 dark:bg-[#0F172A]">
+    <section className=" transition-colors py-16 bg-[#FFE8E8]/20 dark:bg-[#0F172A]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h2 className="text-3xl md:text-4xl text-center font-extrabold text-[#BB2B29] dark:text-[#FFE8E8] mb-2">
           Blood Donation Gallery

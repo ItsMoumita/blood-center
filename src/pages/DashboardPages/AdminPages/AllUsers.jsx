@@ -46,16 +46,16 @@ const AllUsers = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className=" p-2  sm:p-4 min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] text-white transition-colors duration-300">
+    <div className=" p-2  sm:p-4 min-h-screen w-full bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFE8E8]/20 dark:from-[#0F172A] dark:via-[#0d1424] dark:to-[#000000]  transition-colors duration-300">
       <div className="w-full  max-w-6xl mx-auto mt-20 md:mt-12 ">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-          <h2 className="text-2xl md:text-4xl text-center md:text-left font-extrabold text-[#FFE8E8] tracking-tight">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl text-center lg:text-left  font-extrabold text-[#BB2B29] dark:text-[#FFE8E8] tracking-tight">
             All Users
           </h2>
           <select
             value={status}
             onChange={e => { setStatus(e.target.value); setPage(1); }}
-            className="select select-bordered w-full sm:w-48 bg-white dark:bg-[#f3f3f3] text-[#530404] dark:text-[#BB2B29] border-[#BB2B29] dark:border-[#FFE8E8]"
+            className="select select-bordered w-full md:w-48 bg-white dark:bg-[#ddd9d9] text-[#530404] dark:text-[#BB2B29] border-[#BB2B29] dark:border-[#FFE8E8]"
           >
             {statusOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
           </select>
@@ -84,7 +84,7 @@ const AllUsers = () => {
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold
                     ${u.status === "active"
                       ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
+                      : "bg-red-200 text-red-700"
                     }`}>
                     {u.status}
                   </span>
@@ -102,7 +102,7 @@ const AllUsers = () => {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items
-                        className="absolute right-0 top-full mb-2 z-50 w-44 origin-top-right rounded-xl bg-white dark:bg-[#273a57] shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none border border-[#ECAAA0] dark:border-[#BB2B29]"
+                        className="absolute right-0 top-full mb-2 z-50 w-44 origin-top-right rounded-xl bg-[#FFE8E8]/80 dark:bg-[#273a57] shadow-xl ring-1 ring-gray-200 ring-opacity-5 focus:outline-none border border-[#ECAAA0] dark:border-[#BB2B29]"
                       >
                         <div className="py-1">
                           {u.status === "active" ? (
@@ -111,7 +111,7 @@ const AllUsers = () => {
                                 <button
                                   onClick={() => handleAction(u._id, "status", "blocked")}
                                   className={`${
-                                    active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                    active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                   } group flex items-center px-4 py-2 text-sm w-full`}
                                 >
                                   <FaUserTimes className="mr-2" /> Block
@@ -124,7 +124,7 @@ const AllUsers = () => {
                                 <button
                                   onClick={() => handleAction(u._id, "status", "active")}
                                   className={`${
-                                    active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                    active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                   } group flex items-center px-4 py-2 text-sm w-full`}
                                 >
                                   <FaUserCheck className="mr-2" /> Unblock
@@ -138,7 +138,7 @@ const AllUsers = () => {
                                 <button
                                   onClick={() => handleAction(u._id, "role", "volunteer")}
                                   className={`${
-                                    active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                    active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                   } group flex items-center px-4 py-2 text-sm w-full`}
                                 >
                                   <FaUserEdit className="mr-2" /> Make Volunteer
@@ -152,7 +152,7 @@ const AllUsers = () => {
                                 <button
                                   onClick={() => handleAction(u._id, "role", "admin")}
                                   className={`${
-                                    active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                    active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                   } group flex items-center px-4 py-2 text-sm w-full`}
                                 >
                                   <FaUserShield className="mr-2" /> Make Admin
@@ -174,26 +174,26 @@ const AllUsers = () => {
         <div className="hidden md:block">
           <table className="w-full ">
             <thead>
-              <tr className="bg-[#FFE8E8] dark:bg-[#530404]">
-                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">User</th>
-                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Email</th>
-                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Role</th>
-                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Status</th>
-                <th className="py-3 px-2 md:px-4 text-left text-[#BB2B29] dark:text-[#FFE8E8] font-semibold">Actions</th>
+              <tr className="bg-[#BB2B29] dark:bg-[#530404]">
+                <th className="py-3 px-2 md:px-4 text-left text-[#FFE8E8] text-lg font-semibold">User</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#FFE8E8] text-lg font-semibold">Email</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#FFE8E8] text-lg font-semibold">Role</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#FFE8E8] text-lg font-semibold">Status</th>
+                <th className="py-3 px-2 md:px-4 text-left text-[#FFE8E8] text-lg font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.map((u) => (
-                <tr key={u._id} className="group border-b border-b-[#FFE8E8]">
+                <tr key={u._id} className="group border-b border-b-[#BB2B29] dark:border-b-[#FFE8E8] hover:bg-[#BB2B29]/20 dark:hover:bg-[#273a57]/80 transition-colors">
                   <td className="py-3 px-2 md:px-4">
                     <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3">
                       <img src={u.photo} alt="avatar" className="w-10 h-10 rounded-full border-2 border-[#BB2B29] dark:border-[#FFE8E8]" />
                       <div>
-                        <div className="font-semibold text-[#FFE8E8]">{u.name.charAt(0).toUpperCase() + u.name.slice(1)}</div>
+                        <div className="font-semibold text-[#BB2B29] dark:text-[#FFE8E8]">{u.name.charAt(0).toUpperCase() + u.name.slice(1)}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-2 md:px-4  text-[#FFE8E8] break-all">{u.email}</td>
+                  <td className="py-3 px-2 md:px-4  text-[#BB2B29] dark:text-[#FFE8E8] break-all">{u.email}</td>
                   <td className="py-3 px-2 md:px-4">
                     <span className="capitalize px-3 py-1 rounded-full bg-[#ECAAA0]/60 dark:bg-[#BB2B29]/60 text-[#530404] dark:text-[#FFE8E8] font-semibold">
                       {u.role}
@@ -212,7 +212,7 @@ const AllUsers = () => {
                     <div className="flex justify-start">
                       <Menu as="div" className="relative inline-block text-left">
                         <Menu.Button className="p-2 rounded-full hover:bg-[#ECAAA0]/60 dark:hover:bg-[#BB2B29]/60 transition focus:outline-none">
-                          <FaEllipsisV className="text-[#FFE8E8]" />
+                          <FaEllipsisV className="text-[#BB2B29] dark:text-[#FFE8E8]" />
                         </Menu.Button>
                         <Transition
                           as={Fragment}
@@ -224,7 +224,7 @@ const AllUsers = () => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items
-                            className="absolute right-0 top-full mb-2 z-50 w-44 origin-top-right rounded-xl bg-white dark:bg-[#273a57] shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none border border-[#ECAAA0] dark:border-[#BB2B29]"
+                            className="absolute right-0 top-full mb-2 z-50 w-44 origin-top-right rounded-xl bg-[#FFE8E8] dark:bg-[#273a57] shadow-xl ring-1 ring-gray-100 ring-opacity-5 focus:outline-none border border-[#ECAAA0] dark:border-[#BB2B29]"
                           >
                             <div className="py-1">
                               {u.status === "active" ? (
@@ -233,7 +233,7 @@ const AllUsers = () => {
                                     <button
                                       onClick={() => handleAction(u._id, "status", "blocked")}
                                       className={`${
-                                        active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                        active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                       } group flex items-center px-4 py-2 text-sm w-full`}
                                     >
                                       <FaUserTimes className="mr-2" /> Block
@@ -246,7 +246,7 @@ const AllUsers = () => {
                                     <button
                                       onClick={() => handleAction(u._id, "status", "active")}
                                       className={`${
-                                        active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                        active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                       } group flex items-center px-4 py-2 text-sm w-full`}
                                     >
                                       <FaUserCheck className="mr-2" /> Unblock
@@ -260,7 +260,7 @@ const AllUsers = () => {
                                     <button
                                       onClick={() => handleAction(u._id, "role", "volunteer")}
                                       className={`${
-                                        active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                        active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                       } group flex items-center px-4 py-2 text-sm w-full`}
                                     >
                                       <FaUserEdit className="mr-2" /> Make Volunteer
@@ -274,7 +274,7 @@ const AllUsers = () => {
                                     <button
                                       onClick={() => handleAction(u._id, "role", "admin")}
                                       className={`${
-                                        active ? "bg-[#ECAAA0] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
+                                        active ? "bg-[#ECAAA0] dark:bg-[#0f1a2b] text-[#BB2B29]" : "text-[#530404] dark:text-[#FFE8E8]"
                                       } group flex items-center px-4 py-2 text-sm w-full`}
                                     >
                                       <FaUserShield className="mr-2" /> Make Admin
@@ -300,8 +300,8 @@ const AllUsers = () => {
               key={i}
               className={`btn btn-s rounded-xl font-bold border-none ${
                 page === i + 1
-                  ? "bg-white/70 text-[#BB2B29] dark:bg-[#FFE8E8] dark:text-[#530404]"
-                  : "bg-[#ECAAA0] text-[#530404] dark:bg-[#BB2B29] dark:text-[#FFE8E8]"
+                  ? "bg-[#ECAAA0] text-[#530404] dark:bg-[#BB2B29] dark:text-[#FFE8E8]"
+                  : "bg-[#FFE8E8] text-[#BB2B29] dark:bg-[#FFE8E8] dark:text-[#530404]"
               }`}
               onClick={() => setPage(i + 1)}
             >

@@ -97,7 +97,7 @@ const Profile = () => {
     : upazilas.find(u => u.name === profile.upazila)?.id || "";
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-[#530404]/80 to-[#FFE8E8] dark:from-[#0F172A] dark:to-[#000000] flex items-center justify-center py-8">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#87CEEB] via-[#F5F5F5] to-[#FFE8E8]/20 dark:from-[#0F172A] dark:via-[#0d1424] dark:to-[#000000]  transition-colors duration-300 flex items-center justify-center py-8">
       <div className="w-full max-w-xl mx-auto bg-white dark:bg-[#273a57] rounded-2xl shadow-lg p-8">
         <div className="flex flex-col items-center mb-6">
           <img
@@ -107,11 +107,11 @@ const Profile = () => {
           />
         </div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Profile</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#BB2B29] dark:text-[#FFE8E8]">Profile</h2>
           {!editMode ? (
             <button
               type="button"
-              className="text-[#BB2B29] font-bold px-4 py-4 rounded-full hover:bg-[#eeb5b5] transition"
+              className="text-[#BB2B29] dark:text-[#FFE8E8] font-bold px-4 py-4 rounded-full hover:bg-[#FFE8E8] dark:hover:bg-[#0F172A] transition"
               onClick={handleEdit}
               title="Edit"
             >
